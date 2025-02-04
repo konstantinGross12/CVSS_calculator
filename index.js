@@ -17,6 +17,14 @@ console.log(data.i);
 console.log("Availability Impact");
 console.log(data.a);
 console.log("--------------------------------");
+console.log("Temporal");
+console.log("Exploit Code Maturity");
+console.log(data.e);
+console.log("Remediation Level");
+console.log(data.rl);
+console.log("Report Confidence");
+console.log(data.rc);
+console.log("--------------------------------");
 console.log("Environmental");
 
 let CVSS_base_score;

@@ -161,3 +161,111 @@ export const a = [
     string_value: "A:N",
   },
 ];
+//Temporal
+//Exploit Code Maturity
+export const e = [
+  {
+    label: "Not Defined",
+    value_calcultation: 1,
+    dataverse_label: "Not Defined",
+    dataverse_value: 775000000,
+    string_value: "E:X",
+  },
+  {
+    label: "High",
+    value_calcultation: 1,
+    dataverse_label: "High",
+    dataverse_value: 775000004,
+    string_value: "E:H",
+  },
+  {
+    label: "Functional",
+    value_calcultation: 0.97,
+    dataverse_label: "Functional exploit exists",
+    dataverse_value: 775000003,
+    string_value: "E:F",
+  },
+  {
+    label: "Proof of Concept",
+    value_calcultation: 0.94,
+    dataverse_label: "Proof of concept code",
+    dataverse_value: 775000002,
+    string_value: "E:P",
+  },
+  {
+    label: "Unproven",
+    value_calcultation: 0.91,
+    dataverse_label: "Unproven that exploit exists",
+    dataverse_value: 775000001,
+    string_value: "E:U",
+  },
+];
+//Remediation Level
+export const rl = [
+  {
+    label: "Not Defined",
+    value_calcultation: 1,
+    dataverse_label: "Not Defined",
+    dataverse_value: 775000000,
+    string_value: "RL:X",
+  },
+  {
+    label: "Unavailable",
+    value_calcultation: 1,
+    dataverse_label: "Unavailable",
+    dataverse_value: 775000004,
+    string_value: "RL:U",
+  },
+  {
+    label: "Workaround",
+    value_calcultation: 0.97,
+    dataverse_label: "Workaround",
+    dataverse_value: 775000003,
+    string_value: "RL:W",
+  },
+  {
+    label: "Temporary Fix",
+    value_calcultation: 0.96,
+    dataverse_label: "Temporary fix",
+    dataverse_value: 775000002,
+    string_value: "RL:T",
+  },
+  {
+    label: "Official Fix",
+    value_calcultation: 0.95,
+    dataverse_label: "Official fix",
+    dataverse_value: 775000001,
+    string_value: "RL:O",
+  },
+];
+//Report Confidence
+export const rc = [
+  {
+    label: "Not Defined",
+    value_calcultation: 1,
+    dataverse_label: "Not Defined",
+    dataverse_value: 775000000,
+    string_value: "RC:X",
+  },
+  {
+    label: "Confirmed",
+    value_calcultation: 1,
+    dataverse_label: "Confirmed",
+    dataverse_value: 775000003,
+    string_value: "RC:C",
+  },
+  {
+    label: "Reasonable",
+    value_calcultation: 0.96,
+    dataverse_label: "Reasonable",
+    dataverse_value: 775000002,
+    string_value: "RC:R",
+  },
+  {
+    label: "Unknown",
+    value_calcultation: 0.92,
+    dataverse_label: "Unknown",
+    dataverse_value: 775000001,
+    string_value: "RC:U",
+  },
+];
