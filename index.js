@@ -1,8 +1,11 @@
-import * as data from './data/data.js';
+import * as data from "./data/data.js";
 
 //console.log('Hello World');
-console.log(data.data);
+console.log("Here I display Attack Vector");
 console.log(data.av);
+console.log("--------------------------------");
+console.log("Here I display Attack Complexity");
+console.log(data.ac);
 
 let CVSS_base_score;
 let impact_sub_score;
