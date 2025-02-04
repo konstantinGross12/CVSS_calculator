@@ -1,0 +1,13 @@
+{
+  "name": "cvss_calculator",
+  "version": "1.0.0",
+  "type": "module",
+  "description": "This is a test project for CVSS calculator",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node index.js"
+  },
+  "author": "Babuin",
+  "license": "ISC"
+}
