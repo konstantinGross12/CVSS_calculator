@@ -269,3 +269,96 @@ export const rc = [
     string_value: "RC:U",
   },
 ];
+//Environmental
+//Attack Vector(MAV)
+export const mav = [
+  {
+    label: "Network",
+    value_calcultation: 0.85,
+    dataverse_label: "Network",
+    dataverse_value: 775000001,
+    string_value: "MAV:N",
+  },
+  {
+    label: "Adjacent",
+    value_calcultation: 0.62,
+    dataverse_label: "Adjacent Network",
+    dataverse_value: 775000002,
+    string_value: "MAV:A",
+  },
+  {
+    label: "Local",
+    value_calcultation: 0.55,
+    dataverse_label: "Local",
+    dataverse_value: 775000003,
+    string_value: "MAV:L",
+  },
+  {
+    label: "Physical",
+    value_calcultation: 0.2,
+    dataverse_label: "Physical",
+    dataverse_value: 775000004,
+    string_value: "MAV:P",
+  },
+];
+// Attack Complexity (MAC)
+export const mac = [
+  {
+    label: "Low",
+    value_calcultation: 0.77,
+    dataverse_label: "Low",
+    dataverse_value: 775000001,
+    string_value: "MAC:L",
+  },
+  {
+    label: "High",
+    value_calcultation: 0.44,
+    dataverse_label: "High",
+    dataverse_value: 775000002,
+    string_value: "MAC:H",
+  },
+];
+//Privileges Required (MPR)
+export const mpr = [
+  {
+    label: "None",
+    value_calcultation: 0.85,
+    dataverse_label: "None",
+    dataverse_value: 775000001,
+    string_value: "MPR:N",
+  },
+  {
+    label: "Low",
+    value_calcultation: 0.62, //!!0.62 needs to be discussed!!
+    dataverse_label: "Low",
+    dataverse_value: 775000002,
+    string_value: "MPR:L",
+  },
+  {
+    label: "High",
+    value_calcultation: 0.27, //!!0.27 needs to be discussed!!
+    dataverse_label: "High",
+    dataverse_value: 775000003,
+    string_value: "MPR:H",
+  },
+];
+//User Interaction (MUI)
+export const mui = [
+  {
+    label: "None",
+    value_calcultation: 0.85,
+    dataverse_label: "None",
+    dataverse_value: 775000001,
+    string_value: "MUI:N",
+  },
+  {
+    label: "Required",
+    value_calcultation: 0.62,
+    dataverse_label: "Required",
+    dataverse_value: 775000002,
+    string_value: "MUI:R",
+  },
+];
+//Scope (MS) missing in the CVSS Docu
+//Confidentiality Impact (MC)
+export const mc = [{}, {}, {}];
