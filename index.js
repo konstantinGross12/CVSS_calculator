@@ -26,17 +26,39 @@ console.log("Report Confidence");
 console.log(data.rc);
 console.log("--------------------------------");
 console.log("Environmental");
-console.log("Attack Vector (MAV)");
+console.log("Attack Vector (MAV) - Not Defined missing a value from CVSS Docu");
 console.log(data.mav);
-console.log("Attack Complexity (MAC)");
+console.log(
+  "Attack Complexity (MAC) - Not Defined missing a value from CVSS Docu"
+);
 console.log(data.mac);
-console.log("Privileges Required (MPR) - Low and High values to be discussed");
+console.log(
+  "Privileges Required (MPR) - Low and High values to be discussed - Not Defined missing a value from CVSS Docu"
+);
 console.log(data.mpr);
-console.log("User Interaction(MUI)");
+console.log(
+  "User Interaction(MUI) - Not Defined missing a value from CVSS Docu"
+);
 console.log(data.mui);
 console.log("Scope (MS) is mssing in the CVSS Docu");
-console.log("Confidentiality Impact (MC)");
+console.log(
+  "Confidentiality Impact (MC) - Not Defined missing a value from CVSS Docu"
+);
 console.log(data.mc);
+console.log(
+  "Integrity Impact (MI) - Not Defined missing a value from CVSS Docu"
+);
+console.log(data.mi);
+console.log(
+  "Availability Impact (MA) - Not Defined missing a value from CVSS Docu"
+);
+console.log(data.ma);
+console.log("Confidentiality Requirement (CR)");
+console.log(data.cr);
+console.log("Integrity Requirement (IR)");
+console.log(data.ir);
+console.log("Availability Requirement (AR)");
+console.log(data.ar);
 
 let CVSS_base_score;
 let impact_sub_score;

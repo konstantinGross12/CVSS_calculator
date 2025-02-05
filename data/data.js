@@ -270,7 +270,7 @@ export const rc = [
   },
 ];
 //Environmental
-//Attack Vector(MAV)
+//Attack Vector(MAV) - Not Defined missing a value from CVSS Docu
 export const mav = [
   {
     label: "Network",
@@ -301,7 +301,7 @@ export const mav = [
     string_value: "MAV:P",
   },
 ];
-// Attack Complexity (MAC)
+// Attack Complexity (MAC) - Not Defined missing a value from CVSS Docu
 export const mac = [
   {
     label: "Low",
@@ -318,7 +318,7 @@ export const mac = [
     string_value: "MAC:H",
   },
 ];
-//Privileges Required (MPR)
+//Privileges Required (MPR) - Not Defined missing a value from CVSS Docu
 export const mpr = [
   {
     label: "None",
@@ -342,7 +342,7 @@ export const mpr = [
     string_value: "MPR:H",
   },
 ];
-//User Interaction (MUI)
+//User Interaction (MUI) - Not Defined missing a value from CVSS Docu
 export const mui = [
   {
     label: "None",
@@ -360,5 +360,168 @@ export const mui = [
   },
 ];
 //Scope (MS) missing in the CVSS Docu
-//Confidentiality Impact (MC)
-export const mc = [{}, {}, {}];
+//Confidentiality Impact (MC) - Not Defined missing a value from CVSS Docu
+export const mc = [
+  {
+    label: "High",
+    value_calcultation: 0.56,
+    dataverse_label: "High",
+    dataverse_value: 775000003,
+    string_value: "MC:H",
+  },
+  {
+    label: "Low",
+    value_calcultation: 0.22,
+    dataverse_label: "Low",
+    dataverse_value: 775000002,
+    string_value: "MC:L",
+  },
+  {
+    label: "None",
+    value_calcultation: 0,
+    dataverse_label: "None",
+    dataverse_value: 775000001,
+    string_value: "MC:N",
+  },
+];
+//Integrity Impact (MI) - Not Defined missing a value from CVSS Docu
+export const mi = [
+  {
+    label: "High",
+    value_calcultation: 0.56,
+    dataverse_label: "High",
+    dataverse_value: 775000003,
+    string_value: "MI:H",
+  },
+  {
+    label: "Low",
+    value_calcultation: 0.22,
+    dataverse_label: "Low",
+    dataverse_value: 775000002,
+    string_value: "MI:L",
+  },
+  {
+    label: "None",
+    value_calcultation: 0,
+    dataverse_label: "None",
+    dataverse_value: 775000001,
+    string_value: "MI:N",
+  },
+];
+//Availability Impact (MA) - Not Defined missing a value from CVSS Docu
+export const ma = [
+  {
+    label: "High",
+    value_calcultation: 0.56,
+    dataverse_label: "High",
+    dataverse_value: 775000003,
+    string_value: "MA:H",
+  },
+  {
+    label: "Low",
+    value_calcultation: 0.22,
+    dataverse_label: "Low",
+    dataverse_value: 775000002,
+    string_value: "MA:L",
+  },
+  {
+    label: "None",
+    value_calcultation: 0,
+    dataverse_label: "None",
+    dataverse_value: 775000001,
+    string_value: "MA:N",
+  },
+];
+//Confidentiality Requirement (CR)
+export const cr = [
+  {
+    label: "Not Defined",
+    value_calcultation: 1,
+    dataverse_label: "Not Defined",
+    dataverse_value: 775000000,
+    string_value: "CR:X",
+  },
+  {
+    label: "High",
+    value_calcultation: 1.5,
+    dataverse_label: "High",
+    dataverse_value: 775000003,
+    string_value: "CR:H",
+  },
+  {
+    label: "Medium",
+    value_calcultation: 1,
+    dataverse_label: "Medium",
+    dataverse_value: 775000002,
+    string_value: "CR:M",
+  },
+  {
+    label: "Low",
+    value_calcultation: 0.5,
+    dataverse_label: "Low",
+    dataverse_value: 775000001,
+    string_value: "CR:L",
+  },
+];
+//Integrity Requirement (IR)
+export const ir = [
+  {
+    label: "Not Defined",
+    value_calcultation: 1,
+    dataverse_label: "Not Defined",
+    dataverse_value: 775000000,
+    string_value: "IR:X",
+  },
+  {
+    label: "High",
+    value_calcultation: 1.5,
+    dataverse_label: "High",
+    dataverse_value: 775000003,
+    string_value: "IR:H",
+  },
+  {
+    label: "Medium",
+    value_calcultation: 1,
+    dataverse_label: "Medium",
+    dataverse_value: 775000002,
+    string_value: "IR:M",
+  },
+  {
+    label: "Low",
+    value_calcultation: 0.5,
+    dataverse_label: "Low",
+    dataverse_value: 775000001,
+    string_value: "IR:L",
+  },
+];
+//Availability Requirement (AR)
+export const ar = [
+  {
+    label: "Not Defined",
+    value_calcultation: 1,
+    dataverse_label: "Not Defined",
+    dataverse_value: 775000000,
+    string_value: "AR:X",
+  },
+  {
+    label: "High",
+    value_calcultation: 1.5,
+    dataverse_label: "High",
+    dataverse_value: 775000003,
+    string_value: "AR:H",
+  },
+  {
+    label: "Medium",
+    value_calcultation: 1,
+    dataverse_label: "Medium",
+    dataverse_value: 775000002,
+    string_value: "AR:M",
+  },
+  {
+    label: "Low",
+    value_calcultation: 0.5,
+    dataverse_label: "Low",
+    dataverse_value: 775000001,
+    string_value: "AR:L",
+  },
+];
