@@ -5,9 +5,12 @@
   "description": "This is a test project for CVSS calculator",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "vitest --globals",
     "start": "node index.js"
   },
   "author": "Babuin",
-  "license": "ISC"
+  "license": "ISC",
+  "devDependencies": {
+    "vitest": "^3.0.5"
+  }
 }
