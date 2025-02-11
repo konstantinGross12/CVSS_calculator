@@ -1,7 +1,9 @@
 import * as data from './data/data.js';
 import * as helper from './helper.js';
 
-let input = [775000002, 775000001, 775000002];
+let input = helper.input_base_full_randomzer(data.base_full_input_data);
+console.log(input);
+debugger;
 /*
 console.log('Base');
 console.log('Attack Vector');

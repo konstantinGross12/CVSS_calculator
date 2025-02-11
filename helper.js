@@ -1,3 +1,19 @@
+export const input_base_full_randomzer = function (input_data) {
+  let result = [];
+
+  for (const input_element of input_data) {
+    const randox_index = Math.floor(Math.random() * input_element.length);
+    result.push(input_element[randox_index]);
+  }
+
+  return result;
+};
+//todo: implement the rest of the functions
+export const input_base_temporal_full_randomzer = function (input_data) {};
+
+//todo: implement the rest of the functions
+export const input_base_temporal_environmental_full_randomzer = function (input_data) {};
+
 export const Minimum = function (val_1, val_2) {
   return val_1 < val_2 ? val_1 : val_2;
 };

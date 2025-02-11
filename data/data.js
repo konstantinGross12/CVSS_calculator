@@ -89,6 +89,23 @@ export const ui = [
     string_value: 'UI:R',
   },
 ];
+
+export const s = [
+  {
+    label: 'Unchanged',
+    value_calcultation: 0.85,
+    dataverse_label: 'Unchanged',
+    dataverse_value: 775000000,
+    string_value: 'S:U',
+  },
+  {
+    label: 'Changed',
+    value_calcultation: 0.62, //!!0.62 needs to be discussed!!
+    dataverse_label: 'Changed',
+    dataverse_value: 775000001,
+    string_value: 'S:C',
+  },
+];
 //Scope is missing in the CVSS Docu
 //Confidentiality Impact
 export const c = [
@@ -527,4 +544,18 @@ export const ar = [
   },
 ];
 
-export const data = [av, ac, pr, ui, c, i, a, e, rl, rc, mav, mac, mpr, mui, mc, mi, ma, cr, ir, ar];
+export const data = [av, ac, pr, ui, s, c, i, a, e, rl, rc, mav, mac, mpr, mui, mc, mi, ma, cr, ir, ar];
+export const base_full_input_data = [
+  [775000000, 775000001, 775000002, 775000003], // AV
+  [775000000, 775000001], // AC
+  [775000000, 775000001, 775000002], // PR
+  [775000000, 775000001], // UI
+  [775000000, 775000001], // S
+  [775000000, 775000001, 775000002], // C
+  [775000000, 775000001, 775000002], // I
+  [775000000, 775000001, 775000002], // A
+];
+
+//todo: implement base_temploar_input_data
+
+//todo: implement base_temporal_environmental_input_data
