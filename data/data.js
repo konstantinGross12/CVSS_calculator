@@ -614,7 +614,7 @@ export const ar = [
     string_value: 'AR:L',
   },
 ];
-
+// Happy Path
 export const base_full_input_data = [
   // base part
   { id: 'av', values: [775000000, 775000001, 775000002, 775000003] }, // AV
@@ -644,4 +644,16 @@ export const base_full_input_data = [
   { id: 'cr', values: [775000000, 775000001, 775000002, 775000003] }, // CR
   { id: 'ir', values: [775000000, 775000001, 775000002, 775000003] }, // IR
   { id: 'ar', values: [775000000, 775000001, 775000002, 775000003] }, // AR
+];
+
+// Worst Case
+
+export const base_full_input_data_worst_case = [
+  { id: 'av', values: [77500033, '775000001', 775000002, 775000003] }, // AV
+  { id: 'ac', values: [775000000, null] }, // AC
+  { id: 'pr', values: [775000000, 775000001, 775000002] }, // PR
+  // S
+  { id: 'c', values: [null, null, null] }, // C
+  { id: 'i', values: [775000000, 775000001, 775000002] }, // I
+  { id: 'a', values: [775000000, 775000001, 775000002] }, // A
 ];

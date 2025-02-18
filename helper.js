@@ -76,8 +76,45 @@ export const calculate_Overall_CVSS_vector = function (input, data) {
 };
 
 export const is_mandatory_input_given = function (input) {
-  if (input.length < 8) {
-    return false;
+  // all base object are given
+  let av = false;
+  let ac = false;
+  let pr = false;
+  let ui = false;
+  let s = false;
+  let c = false;
+  let i = false;
+  let a = false;
+  for (const element of input) {
+    if (
+      element.id === 'av' &&
+      element.value !== null &&
+      [775000000, 775000001, 775000002, 775000003].includes(element.value)
+    ) {
+      av = true;
+    }
+    if (element.id === 'ac' && element.value !== null && [775000000, 775000001].includes(element.value)) {
+      ac = true;
+    }
+    if (element.id === 'pr' && element.value !== null && [775000000, 775000001, 775000002].includes(element.value)) {
+      pr = true;
+    }
+    if (element.id === 'ui' && element.value !== null && [775000000, 775000001].includes(element.value)) {
+      ui = true;
+    }
+    if (element.id === 's' && element.value !== null && [775000000, 775000001].includes(element.value)) {
+      s = true;
+    }
+    if (element.id === 'c' && element.value !== null && [775000000, 775000001, 775000002].includes(element.value)) {
+      c = true;
+    }
+    if (element.id === 'i' && element.value !== null && [775000000, 775000001, 775000002].includes(element.value)) {
+      i = true;
+    }
+    if (element.id === 'a' && element.value !== null && [775000000, 775000001, 775000002].includes(element.value)) {
+      a = true;
+    }
   }
-  return true;
+
+  return av && ac && pr && ui && s && c && i && a;
 };
