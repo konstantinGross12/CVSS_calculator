@@ -35,39 +35,8 @@ export const input_base_full_randomzer = function (input_data) {
     const randox_index = Math.floor(Math.random() * input_object.values.length);
 
     const random_value = input_object.values[randox_index];
-    // populate the result with the random value
+
     result[result_index].value = random_value;
-    // some loging
-    console.log('--------------------------------');
-    console.log(`This is input_object ${JSON.stringify(input_object)}`);
-    console.log(`This is result_index ${result_index}`);
-    console.log(`This is randox_index ${randox_index}`);
-    console.log(`This is random_value ${random_value}`);
-    console.log('--------------------------------');
-
-    // I should return result with id and value
-  }
-  console.log(`This is the result ${JSON.stringify(result)}`);
-  return result;
-};
-
-export const input_base_temporal_full_randomzer = function (input_data) {
-  let result = [];
-
-  for (const input_object of input_data) {
-    const random_index = Math.floor(Math.random() * input_object.length);
-    result.push(input_object[random_index]);
-  }
-
-  return result;
-};
-
-export const input_base_temporal_environmental_full_randomzer = function (input_data) {
-  let result = [];
-
-  for (const input_object of input_data) {
-    const random_index = Math.floor(Math.random() * input_object.length);
-    result.push(input_object[random_index]);
   }
 
   return result;
