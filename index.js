@@ -10,6 +10,6 @@ let CVSS_temporal_score;
 let CVSS_environmental_score;
 let CVSS_modified_score;
 let Overall_CVSS_score;
-let Overall_CVSS_vector = helper.calculate_Overall_CVSS_vector(input, data.data);
+let Overall_CVSS_vector = helper.calculate_Overall_CVSS_vector(input, data);
 
 console.log(Overall_CVSS_vector);

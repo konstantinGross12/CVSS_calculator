@@ -56,12 +56,18 @@ export const calculate_impact_sub_score = function (confidentiality, integrity, 
 
 export const calculate_Overall_CVSS_vector = function (input, data) {
   let result = '';
-  for (let index = 0; index < input.length; index++) {
-    const element = input[index];
 
-    for (const value of data[index]) {
-      if (value.dataverse_value === element) {
-        result += `${value.string_value}/`;
+  for (let index = 0; index < input.length; index++) {
+    // input elements
+    const input_element = input[index];
+    const input_element_id = input_element.id;
+    const input_element_value = input_element.value;
+    // data elements
+    const data_element_array = data[input_element_id];
+
+    for (const data_obj of data_element_array) {
+      if (data_obj.dataverse_value === input_element_value) {
+        result += `${data_obj.string_value}/`;
       }
     }
   }
