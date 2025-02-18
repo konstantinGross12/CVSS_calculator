@@ -2,7 +2,7 @@ import * as data from './data/data.js';
 import * as helper from './helper.js';
 
 //let invalid_input = helper.input_base_full_randomzer(data.base_full_input_data_worst_case);
-let input = helper.input_base_full_randomzer(data.base_full_input_data);
+let input = helper.input_base_full_randomzer(data.base_full_input_data_some_missing);
 let is_valid_input = helper.is_mandatory_input_given(input);
 
 if (!is_valid_input) {

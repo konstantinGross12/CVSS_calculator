@@ -1,3 +1,4 @@
+//#region BASE
 //BASE
 //Attack Vector
 export const av = [
@@ -178,9 +179,18 @@ export const a = [
     string_value: 'A:N',
   },
 ];
+//#endregion
+//#region TEMPORAL
 //Temporal
 //Exploit Code Maturity
 export const e = [
+  {
+    label: 'Null',
+    value_calcultation: 1,
+    dataverse_label: 'Not Defined',
+    dataverse_value: null,
+    string_value: 'E:X',
+  },
   {
     label: 'Not Defined',
     value_calcultation: 1,
@@ -220,6 +230,13 @@ export const e = [
 //Remediation Level
 export const rl = [
   {
+    label: 'Null',
+    value_calcultation: 1,
+    dataverse_label: 'Not Defined',
+    dataverse_value: null,
+    string_value: 'RL:X',
+  },
+  {
     label: 'Not Defined',
     value_calcultation: 1,
     dataverse_label: 'Not Defined',
@@ -258,6 +275,13 @@ export const rl = [
 //Report Confidence
 export const rc = [
   {
+    label: 'Null',
+    value_calcultation: 1,
+    dataverse_label: 'Not Defined',
+    dataverse_value: null,
+    string_value: 'RC:X',
+  },
+  {
     label: 'Not Defined',
     value_calcultation: 1,
     dataverse_label: 'Not Defined',
@@ -286,6 +310,8 @@ export const rc = [
     string_value: 'RC:U',
   },
 ];
+//#endregion
+//#region ENVIRONMENTAL
 //Environmental
 //Attack Vector(MAV)
 export const mav = [
@@ -324,6 +350,13 @@ export const mav = [
     dataverse_value: 775000000,
     string_value: 'MAV:X',
   },
+  {
+    label: 'Null',
+    value_calcultation: null,
+    dataverse_label: 'Not Defined',
+    dataverse_value: null,
+    string_value: 'MAV:X',
+  },
 ];
 // Attack Complexity (MAC)
 export const mac = [
@@ -346,6 +379,13 @@ export const mac = [
     value_calcultation: null,
     dataverse_label: 'Not Defined',
     dataverse_value: 775000000,
+    string_value: 'MAC:X',
+  },
+  {
+    label: 'Null',
+    value_calcultation: null,
+    dataverse_label: 'Not Defined',
+    dataverse_value: null,
     string_value: 'MAC:X',
   },
 ];
@@ -379,6 +419,13 @@ export const mpr = [
     dataverse_value: 775000000,
     string_value: 'MPR:X',
   },
+  {
+    label: 'Null',
+    value_calcultation: null,
+    dataverse_label: 'Not Defined',
+    dataverse_value: null,
+    string_value: 'MPR:X',
+  },
 ];
 //User Interaction (MUI)
 export const mui = [
@@ -403,6 +450,13 @@ export const mui = [
     dataverse_value: 775000000,
     string_value: 'MUI:X',
   },
+  {
+    label: 'Null',
+    value_calcultation: null,
+    dataverse_label: 'Not Defined',
+    dataverse_value: null,
+    string_value: 'MUI:X',
+  },
 ];
 // Modified Scope (MS)
 export const ms = [
@@ -425,6 +479,13 @@ export const ms = [
     value_calcultation: null,
     dataverse_label: 'Not Defined',
     dataverse_value: 775000000,
+    string_value: 'MS:X',
+  },
+  {
+    label: 'Null',
+    value_calcultation: null,
+    dataverse_label: 'Not Defined',
+    dataverse_value: null,
     string_value: 'MS:X',
   },
 ];
@@ -458,6 +519,13 @@ export const mc = [
     dataverse_value: 775000000,
     string_value: 'MC:X',
   },
+  {
+    label: 'Null',
+    value_calcultation: null,
+    dataverse_label: 'Not Defined',
+    dataverse_value: null,
+    string_value: 'MC:X',
+  },
 ];
 //Integrity Impact (MI)
 export const mi = [
@@ -487,6 +555,13 @@ export const mi = [
     value_calcultation: null,
     dataverse_label: 'Not Defined',
     dataverse_value: 775000000,
+    string_value: 'MI:X',
+  },
+  {
+    label: 'Null',
+    value_calcultation: null,
+    dataverse_label: 'Not Defined',
+    dataverse_value: null,
     string_value: 'MI:X',
   },
 ];
@@ -520,9 +595,23 @@ export const ma = [
     dataverse_value: 775000000,
     string_value: 'MA:X',
   },
+  {
+    label: 'Null',
+    value_calcultation: null,
+    dataverse_label: 'Not Defined',
+    dataverse_value: null,
+    string_value: 'MA:X',
+  },
 ];
 //Confidentiality Requirement (CR)
 export const cr = [
+  {
+    label: 'Null',
+    value_calcultation: 1,
+    dataverse_label: 'Not Defined',
+    dataverse_value: null,
+    string_value: 'CR:X',
+  },
   {
     label: 'Not Defined',
     value_calcultation: 1,
@@ -555,6 +644,13 @@ export const cr = [
 //Integrity Requirement (IR)
 export const ir = [
   {
+    label: 'Null',
+    value_calcultation: 1,
+    dataverse_label: 'Not Defined',
+    dataverse_value: null,
+    string_value: 'IR:X',
+  },
+  {
     label: 'Not Defined',
     value_calcultation: 1,
     dataverse_label: 'Not Defined',
@@ -586,6 +682,13 @@ export const ir = [
 //Availability Requirement (AR)
 export const ar = [
   {
+    label: 'Null',
+    value_calcultation: 1,
+    dataverse_label: 'Not Defined',
+    dataverse_value: null,
+    string_value: 'AR:X',
+  },
+  {
     label: 'Not Defined',
     value_calcultation: 1,
     dataverse_label: 'Not Defined',
@@ -614,6 +717,7 @@ export const ar = [
     string_value: 'AR:L',
   },
 ];
+//#endregion
 // Happy Path
 export const base_full_input_data = [
   // base part
@@ -656,4 +760,36 @@ export const base_full_input_data_worst_case = [
   { id: 'c', values: [null, null, null] }, // C
   { id: 'i', values: [775000000, 775000001, 775000002] }, // I
   { id: 'a', values: [775000000, 775000001, 775000002] }, // A
+];
+
+// Some vaules are missing
+
+export const base_full_input_data_some_missing = [
+  { id: 'av', values: [775000000, 775000001, 775000002, 775000003] }, // AV
+  { id: 'ac', values: [775000000, 775000001] }, // AC
+  { id: 'pr', values: [775000000, 775000001, 775000002] }, // PR
+  { id: 'ui', values: [775000000, 775000001] }, // UI
+  { id: 's', values: [775000000, 775000001] }, // S
+  { id: 'c', values: [775000000, 775000001, 775000002] }, // C
+  { id: 'i', values: [775000000, 775000001, 775000002] }, // I
+  { id: 'a', values: [775000000, 775000001, 775000002] }, // A
+  // temporal part
+  { id: 'e', values: [null] }, // E
+  { id: 'rl', values: [null] }, // RL
+  { id: 'rc', values: [null] }, // RC
+  // environmental part
+  {
+    id: 'mav',
+    values: [null],
+  }, // MAV
+  { id: 'mac', values: [null] }, // MAC
+  { id: 'mpr', values: [null] }, // MPR
+  { id: 'mui', values: [null] }, // MUI
+  { id: 'ms', values: [null] }, // MS
+  { id: 'mc', values: [null] }, // MC
+  { id: 'mi', values: [null] }, // MI
+  { id: 'ma', values: [null] }, // MA
+  { id: 'cr', values: [null] }, // CR
+  { id: 'ir', values: [null] }, // IR
+  { id: 'ar', values: [null] }, // AR
 ];

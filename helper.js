@@ -37,6 +37,9 @@ export const input_base_full_randomzer = function (input_data) {
     const random_value = input_object.values[randox_index];
 
     result[result_index].value = random_value;
+    if (input_id === 'mac') {
+      debugger;
+    }
   }
 
   return result;
