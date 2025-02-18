@@ -89,6 +89,10 @@ export const calculate_base_score = function (Impact, exploitability, scope_valu
   }
 };
 
+export const calculate_temporal_score = function (BaseScore, e, rl, rc) {
+  return Roundup(BaseScore * e * rl * rc);
+};
+
 export const calculate_Overall_CVSS_vector = function (input, data) {
   let vector = '';
   // ISS inputs
@@ -100,6 +104,9 @@ export const calculate_Overall_CVSS_vector = function (input, data) {
   let ac = 0;
   let pr = 0;
   let ui = 0;
+  let e = 0;
+  let rl = 0;
+  let rc = 0;
 
   for (let index = 0; index < input.length; index++) {
     // input elements
@@ -137,6 +144,15 @@ export const calculate_Overall_CVSS_vector = function (input, data) {
         if (input_element_id === 'ui') {
           ui = data_obj.value_calcultation;
         }
+        if (input_element_id === 'e') {
+          e = data_obj.value_calcultation;
+        }
+        if (input_element_id === 'rl') {
+          rl = data_obj.value_calcultation;
+        }
+        if (input_element_id === 'rc') {
+          rc = data_obj.value_calcultation;
+        }
       }
     }
   }
@@ -145,8 +161,16 @@ export const calculate_Overall_CVSS_vector = function (input, data) {
   const Impact = calculate_impact(ISS_value, scope_value);
   const exploitability = calculate_exploitability(av, ac, pr, ui, scope_value);
   const BaseScore = calculate_base_score(Impact, exploitability, scope_value);
+  const TemporalScore = calculate_temporal_score(BaseScore, e, rl, rc);
   vector = vector.slice(0, -1);
-  return { vector: vector, ISS: ISS_value, Impact: Impact, exploitability: exploitability, BaseScore: BaseScore };
+  return {
+    vector: vector,
+    ISS: ISS_value,
+    Impact: Impact,
+    exploitability: exploitability,
+    BaseScore: BaseScore,
+    TemporalScore: TemporalScore,
+  };
 };
 
 export const is_mandatory_input_given = function (input) {

@@ -9,18 +9,19 @@ if (!is_valid_input) {
   console.log('Mandatory input is missing');
 } else {
   console.log('Mandatory input is present');
-  //let ISS = helper.ISS();
-  let CVSS_base_score;
 
-  let exploitability_sub_score;
   let CVSS_temporal_score;
   let CVSS_environmental_score;
   let CVSS_modified_score;
   let Overall_CVSS_score;
+
   let Overall_CVSS_vector = helper.calculate_Overall_CVSS_vector(input, data);
   console.log(Overall_CVSS_vector.vector);
+  /*
   console.log(`ISS is  ${Overall_CVSS_vector.ISS}`);
   console.log(`Impact is ${Overall_CVSS_vector.Impact}`);
   console.log(`Exploitability is  ${Overall_CVSS_vector.exploitability}`);
   console.log(`BaseScore is  ${Overall_CVSS_vector.BaseScore}`);
+  */
+  console.log(`TemporalScore is  ${Overall_CVSS_vector.TemporalScore}`);
 }
