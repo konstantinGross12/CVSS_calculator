@@ -27,4 +27,5 @@ if (!is_valid_input) {
   console.log(`MISS is  ${Overall_CVSS_vector.MISS}`);
   console.log(`ModifiedImpact is  ${Overall_CVSS_vector.ModifiedImpact}`);
   console.log(`ModifiedExploitability is  ${Overall_CVSS_vector.ModifiedExploitability}`);
+  console.log(`EnvironmentalScore is  ${Overall_CVSS_vector.EnvironmentalScore}`);
 }

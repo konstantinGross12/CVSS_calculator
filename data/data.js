@@ -607,7 +607,7 @@ export const ma = [
 export const cr = [
   {
     label: 'Null',
-    value_calcultation: 1,
+    value_calcultation: null,
     dataverse_label: 'Not Defined',
     dataverse_value: null,
     string_value: 'CR:X',

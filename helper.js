@@ -38,7 +38,6 @@ export const input_base_full_randomzer = function (input_data) {
 
     result[result_index].value = random_value;
     if (input_id === 'mac') {
-      debugger;
     }
   }
 
@@ -118,6 +117,26 @@ export const calculate_ModifiedExploitability = function (mav, mac, mpr, mui, mo
     mpr_internal = modified_scope_value === 'Unchanged' ? 0.27 : 0.5;
   }
   return 8.22 * mav * mac * mpr_internal * mui;
+};
+
+export const calculate_EnvironmentalScore = function (
+  ModifiedImpact,
+  ModifiedExploitability,
+  modified_scope_value,
+  e,
+  rl,
+  rc
+) {
+  debugger;
+  if (ModifiedImpact <= 0) {
+    return 0;
+  }
+  if (modified_scope_value === 'Unchanged') {
+    return Roundup(Roundup(Minimum(ModifiedImpact + ModifiedExploitability, 10)) * e * rl * rc);
+  }
+  if (modified_scope_value === 'Changed') {
+    return Roundup(Roundup(Minimum(1.08 * (ModifiedImpact + ModifiedExploitability), 10) * e * rl * rc));
+  }
 };
 
 export const calculate_Overall_CVSS_vector = function (input, data) {
@@ -210,7 +229,7 @@ export const calculate_Overall_CVSS_vector = function (input, data) {
           ma = data_obj.value_calcultation;
         }
         if (input_element_id === 'ms') {
-          scope_value = data_obj.label;
+          modified_scope_value = data_obj.label;
         }
         if (input_element_id === 'mav') {
           mav = data_obj.value_calcultation;
@@ -234,8 +253,17 @@ export const calculate_Overall_CVSS_vector = function (input, data) {
   const BaseScore = calculate_base_score(Impact, exploitability, scope_value);
   const TemporalScore = calculate_temporal_score(BaseScore, e, rl, rc);
   const MISS = calculate_MISS(cr, mc, ir, mi, ar, ma);
-  const ModifiedImpact = calculate_ModifiedImpact(MISS, scope_value);
+  // from here with modified values
+  const ModifiedImpact = calculate_ModifiedImpact(MISS, modified_scope_value);
   const ModifiedExploitability = calculate_ModifiedExploitability(mav, mac, mpr, mui, modified_scope_value);
+  const EnvironmentalScore = calculate_EnvironmentalScore(
+    ModifiedImpact,
+    ModifiedExploitability,
+    modified_scope_value,
+    e,
+    rl,
+    rc
+  );
   vector = vector.slice(0, -1);
   return {
     vector: vector,
@@ -247,6 +275,7 @@ export const calculate_Overall_CVSS_vector = function (input, data) {
     MISS: MISS,
     ModifiedImpact: ModifiedImpact,
     ModifiedExploitability: ModifiedExploitability,
+    EnvironmentalScore: EnvironmentalScore,
   };
 };
 
