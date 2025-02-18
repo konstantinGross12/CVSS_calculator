@@ -1,33 +1,73 @@
 export const input_base_full_randomzer = function (input_data) {
-  let result = [];
+  let result = [
+    // base part
+    { id: 'av', value: null },
+    { id: 'ac', value: null },
+    { id: 'pr', value: null },
+    { id: 'ui', value: null },
+    { id: 's', value: null },
+    { id: 'c', value: null },
+    { id: 'i', value: null },
+    { id: 'a', value: null },
+    // temporal part
+    { id: 'e', value: null },
+    { id: 'rl', value: null },
+    { id: 'rc', value: null },
 
-  for (const input_element of input_data) {
-    const randox_index = Math.floor(Math.random() * input_element.length);
-    result.push(input_element[randox_index]);
+    // environmental part
+    { id: 'mav', value: null },
+    { id: 'mac', value: null },
+    { id: 'mpr', value: null },
+    { id: 'mui', value: null },
+    { id: 'ms', value: null },
+    { id: 'mc', value: null },
+    { id: 'mi', value: null },
+    { id: 'ma', value: null },
+    { id: 'cr', value: null },
+    { id: 'ir', value: null },
+    { id: 'ar', value: null },
+  ];
+
+  for (const input_object of input_data) {
+    const input_id = input_object.id;
+    const result_index = result.findIndex((element) => element.id === input_id);
+
+    const randox_index = Math.floor(Math.random() * input_object.values.length);
+
+    const random_value = input_object.values[randox_index];
+    // populate the result with the random value
+    result[result_index].value = random_value;
+    // some loging
+    console.log('--------------------------------');
+    console.log(`This is input_object ${JSON.stringify(input_object)}`);
+    console.log(`This is result_index ${result_index}`);
+    console.log(`This is randox_index ${randox_index}`);
+    console.log(`This is random_value ${random_value}`);
+    console.log('--------------------------------');
+
+    // I should return result with id and value
   }
-
+  console.log(`This is the result ${JSON.stringify(result)}`);
   return result;
 };
 
 export const input_base_temporal_full_randomzer = function (input_data) {
   let result = [];
 
-  for (const input_element of input_data) {
-    const random_index = Math.floor(Math.random() * input_element.length);
-    result.push(input_element[random_index]);
+  for (const input_object of input_data) {
+    const random_index = Math.floor(Math.random() * input_object.length);
+    result.push(input_object[random_index]);
   }
 
   return result;
 };
 
-export const input_base_temporal_environmental_full_randomzer = function (
-  input_data
-) {
+export const input_base_temporal_environmental_full_randomzer = function (input_data) {
   let result = [];
 
-  for (const input_element of input_data) {
-    const random_index = Math.floor(Math.random() * input_element.length);
-    result.push(input_element[random_index]);
+  for (const input_object of input_data) {
+    const random_index = Math.floor(Math.random() * input_object.length);
+    result.push(input_object[random_index]);
   }
 
   return result;
@@ -41,16 +81,12 @@ export const Roundup = function (val) {
   return Math.ceil(val);
 };
 
-export const calculate_impact_sub_score = function (
-  confidentiality,
-  integrity,
-  availability
-) {
+export const calculate_impact_sub_score = function (confidentiality, integrity, availability) {
   return 1 - (1 - confidentiality) * (1 - integrity) * (1 - availability);
 };
 
 export const calculate_Overall_CVSS_vector = function (input, data) {
-  let result = "";
+  let result = '';
   for (let index = 0; index < input.length; index++) {
     const element = input[index];
 
