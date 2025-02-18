@@ -50,7 +50,7 @@ export const Minimum = function (val_1, val_2) {
 };
 
 export const Roundup = function (val) {
-  return Math.ceil(val);
+  return Math.ceil(val * 10) / 10;
 };
 
 export const ISS = function (confidentiality, integrity, availability) {
@@ -76,6 +76,17 @@ export const calculate_exploitability = function (av, ac, pr, ui, s) {
     pr_internal = s === 'Unchanged' ? 0.27 : 0.5;
   }
   return 8.22 * av * ac * pr_internal * ui;
+};
+export const calculate_base_score = function (Impact, exploitability, scope_value) {
+  if (Impact <= 0) {
+    return 0;
+  }
+  if (scope_value === 'Unchanged') {
+    return Roundup(Minimum(Impact + exploitability, 10));
+  }
+  if (scope_value === 'Changed') {
+    return Roundup(Minimum(1.08 * (Impact + exploitability), 10));
+  }
 };
 
 export const calculate_Overall_CVSS_vector = function (input, data) {
@@ -133,8 +144,9 @@ export const calculate_Overall_CVSS_vector = function (input, data) {
   const ISS_value = ISS(confidentiality, integrity, availability);
   const Impact = calculate_impact(ISS_value, scope_value);
   const exploitability = calculate_exploitability(av, ac, pr, ui, scope_value);
+  const BaseScore = calculate_base_score(Impact, exploitability, scope_value);
   vector = vector.slice(0, -1);
-  return { vector: vector, ISS: ISS_value, Impact: Impact, exploitability: exploitability };
+  return { vector: vector, ISS: ISS_value, Impact: Impact, exploitability: exploitability, BaseScore: BaseScore };
 };
 
 export const is_mandatory_input_given = function (input) {

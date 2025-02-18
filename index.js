@@ -22,4 +22,5 @@ if (!is_valid_input) {
   console.log(`ISS is  ${Overall_CVSS_vector.ISS}`);
   console.log(`Impact is ${Overall_CVSS_vector.Impact}`);
   console.log(`Exploitability is  ${Overall_CVSS_vector.exploitability}`);
+  console.log(`BaseScore is  ${Overall_CVSS_vector.BaseScore}`);
 }
