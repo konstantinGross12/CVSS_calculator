@@ -10,7 +10,6 @@ if (!is_valid_input) {
 } else {
   console.log('Mandatory input is present');
 
-  let CVSS_temporal_score;
   let CVSS_environmental_score;
   let CVSS_modified_score;
   let Overall_CVSS_score;
@@ -22,6 +21,10 @@ if (!is_valid_input) {
   console.log(`Impact is ${Overall_CVSS_vector.Impact}`);
   console.log(`Exploitability is  ${Overall_CVSS_vector.exploitability}`);
   console.log(`BaseScore is  ${Overall_CVSS_vector.BaseScore}`);
-  */
   console.log(`TemporalScore is  ${Overall_CVSS_vector.TemporalScore}`);
+  console.log(`MISS is  ${Overall_CVSS_vector.MISS}`);
+  */
+  console.log(`MISS is  ${Overall_CVSS_vector.MISS}`);
+  console.log(`ModifiedImpact is  ${Overall_CVSS_vector.ModifiedImpact}`);
+  console.log(`ModifiedExploitability is  ${Overall_CVSS_vector.ModifiedExploitability}`);
 }

@@ -93,6 +93,33 @@ export const calculate_temporal_score = function (BaseScore, e, rl, rc) {
   return Roundup(BaseScore * e * rl * rc);
 };
 
+export const calculate_MISS = function (cr, mc, ir, mi, ar, ma) {
+  return Minimum(1 - (1 - cr * mc) * (1 - ir * mi) * (1 - ar * ma), 0.915);
+};
+
+export const calculate_ModifiedImpact = function (MISS, modified_scope_value) {
+  if (modified_scope_value === 'Unchanged') {
+    return 6.42 * MISS;
+  }
+  if (modified_scope_value === 'Changed') {
+    return 7.52 * (MISS - 0.029) - 3.25 * Math.pow(MISS * 0.9731 - 0.02, 13);
+  }
+};
+
+export const calculate_ModifiedExploitability = function (mav, mac, mpr, mui, modified_scope_value) {
+  let mpr_internal = 0;
+  if (mpr === 'None') {
+    mpr_internal = 0.85;
+  }
+  if (mpr === 'Low') {
+    mpr_internal = modified_scope_value === 'Unchanged' ? 0.62 : 0.68;
+  }
+  if (mpr === 'High') {
+    mpr_internal = modified_scope_value === 'Unchanged' ? 0.27 : 0.5;
+  }
+  return 8.22 * mav * mac * mpr_internal * mui;
+};
+
 export const calculate_Overall_CVSS_vector = function (input, data) {
   let vector = '';
   // ISS inputs
@@ -107,6 +134,17 @@ export const calculate_Overall_CVSS_vector = function (input, data) {
   let e = 0;
   let rl = 0;
   let rc = 0;
+  let cr = 0;
+  let mc = 0;
+  let ir = 0;
+  let mi = 0;
+  let ar = 0;
+  let ma = 0;
+  let modified_scope_value = '';
+  let mav = 0;
+  let mac = 0;
+  let mpr = 0;
+  let mui = 0;
 
   for (let index = 0; index < input.length; index++) {
     // input elements
@@ -153,6 +191,39 @@ export const calculate_Overall_CVSS_vector = function (input, data) {
         if (input_element_id === 'rc') {
           rc = data_obj.value_calcultation;
         }
+        if (input_element_id === 'cr') {
+          cr = data_obj.value_calcultation;
+        }
+        if (input_element_id === 'mc') {
+          mc = data_obj.value_calcultation;
+        }
+        if (input_element_id === 'ir') {
+          ir = data_obj.value_calcultation;
+        }
+        if (input_element_id === 'mi') {
+          mi = data_obj.value_calcultation;
+        }
+        if (input_element_id === 'ar') {
+          ar = data_obj.value_calcultation;
+        }
+        if (input_element_id === 'ma') {
+          ma = data_obj.value_calcultation;
+        }
+        if (input_element_id === 'ms') {
+          scope_value = data_obj.label;
+        }
+        if (input_element_id === 'mav') {
+          mav = data_obj.value_calcultation;
+        }
+        if (input_element_id === 'mac') {
+          mac = data_obj.value_calcultation;
+        }
+        if (input_element_id === 'mpr') {
+          mpr = data_obj.label;
+        }
+        if (input_element_id === 'mui') {
+          mui = data_obj.value_calcultation;
+        }
       }
     }
   }
@@ -162,6 +233,9 @@ export const calculate_Overall_CVSS_vector = function (input, data) {
   const exploitability = calculate_exploitability(av, ac, pr, ui, scope_value);
   const BaseScore = calculate_base_score(Impact, exploitability, scope_value);
   const TemporalScore = calculate_temporal_score(BaseScore, e, rl, rc);
+  const MISS = calculate_MISS(cr, mc, ir, mi, ar, ma);
+  const ModifiedImpact = calculate_ModifiedImpact(MISS, scope_value);
+  const ModifiedExploitability = calculate_ModifiedExploitability(mav, mac, mpr, mui, modified_scope_value);
   vector = vector.slice(0, -1);
   return {
     vector: vector,
@@ -170,6 +244,9 @@ export const calculate_Overall_CVSS_vector = function (input, data) {
     exploitability: exploitability,
     BaseScore: BaseScore,
     TemporalScore: TemporalScore,
+    MISS: MISS,
+    ModifiedImpact: ModifiedImpact,
+    ModifiedExploitability: ModifiedExploitability,
   };
 };
 
