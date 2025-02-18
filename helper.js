@@ -53,12 +53,42 @@ export const Roundup = function (val) {
   return Math.ceil(val);
 };
 
-export const calculate_impact_sub_score = function (confidentiality, integrity, availability) {
+export const ISS = function (confidentiality, integrity, availability) {
   return 1 - (1 - confidentiality) * (1 - integrity) * (1 - availability);
+};
+export const calculate_impact = function (ISS, scope_value) {
+  if (scope_value === 'Unchanged') {
+    return 6.42 * ISS;
+  }
+  if (scope_value === 'Changed') {
+    return 7.52 * (ISS - 0.029) - 3.25 * Math.pow(ISS - 0.02, 15);
+  }
+};
+export const calculate_exploitability = function (av, ac, pr, ui, s) {
+  let pr_internal = 0;
+  if (pr === 'None') {
+    pr_internal = 0.85;
+  }
+  if (pr === 'Low') {
+    pr_internal = s === 'Unchanged' ? 0.62 : 0.68;
+  }
+  if (pr === 'High') {
+    pr_internal = s === 'Unchanged' ? 0.27 : 0.5;
+  }
+  return 8.22 * av * ac * pr_internal * ui;
 };
 
 export const calculate_Overall_CVSS_vector = function (input, data) {
-  let result = '';
+  let vector = '';
+  // ISS inputs
+  let confidentiality = 0;
+  let integrity = 0;
+  let availability = 0;
+  let scope_value = '';
+  let av = 0;
+  let ac = 0;
+  let pr = 0;
+  let ui = 0;
 
   for (let index = 0; index < input.length; index++) {
     // input elements
@@ -69,13 +99,42 @@ export const calculate_Overall_CVSS_vector = function (input, data) {
     const data_element_array = data[input_element_id];
 
     for (const data_obj of data_element_array) {
+      //console.log(data_obj);
       if (data_obj.dataverse_value === input_element_value) {
-        result += `${data_obj.string_value}/`;
+        vector += `${data_obj.string_value}/`;
+        if (input_element_id === 'c') {
+          confidentiality = data_obj.value_calcultation;
+        }
+        if (input_element_id === 'i') {
+          integrity = data_obj.value_calcultation;
+        }
+        if (input_element_id === 'a') {
+          availability = data_obj.value_calcultation;
+        }
+        if (input_element_id === 's') {
+          scope_value = data_obj.label;
+        }
+        if (input_element_id === 'av') {
+          av = data_obj.value_calcultation;
+        }
+        if (input_element_id === 'ac') {
+          ac = data_obj.value_calcultation;
+        }
+        if (input_element_id === 'pr') {
+          pr = data_obj.label;
+        }
+        if (input_element_id === 'ui') {
+          ui = data_obj.value_calcultation;
+        }
       }
     }
   }
-  result = result.slice(0, -1);
-  return result;
+
+  const ISS_value = ISS(confidentiality, integrity, availability);
+  const Impact = calculate_impact(ISS_value, scope_value);
+  const exploitability = calculate_exploitability(av, ac, pr, ui, scope_value);
+  vector = vector.slice(0, -1);
+  return { vector: vector, ISS: ISS_value, Impact: Impact, exploitability: exploitability };
 };
 
 export const is_mandatory_input_given = function (input) {
