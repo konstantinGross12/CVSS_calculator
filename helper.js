@@ -1,3 +1,5 @@
+//#region Data
+
 export const input_base_full_randomzer = function (input_data) {
   let result = [
     // base part
@@ -59,6 +61,52 @@ export const Roundup = function (input) {
   }
 };
 
+export const is_mandatory_input_given = function (input) {
+  // all base object are given
+  let av = false;
+  let ac = false;
+  let pr = false;
+  let ui = false;
+  let s = false;
+  let c = false;
+  let i = false;
+  let a = false;
+  for (const element of input) {
+    if (
+      element.id === 'av' &&
+      element.value !== null &&
+      [775000000, 775000001, 775000002, 775000003].includes(element.value)
+    ) {
+      av = true;
+    }
+    if (element.id === 'ac' && element.value !== null && [775000000, 775000001].includes(element.value)) {
+      ac = true;
+    }
+    if (element.id === 'pr' && element.value !== null && [775000000, 775000001, 775000002].includes(element.value)) {
+      pr = true;
+    }
+    if (element.id === 'ui' && element.value !== null && [775000000, 775000001].includes(element.value)) {
+      ui = true;
+    }
+    if (element.id === 's' && element.value !== null && [775000000, 775000001].includes(element.value)) {
+      s = true;
+    }
+    if (element.id === 'c' && element.value !== null && [775000000, 775000001, 775000002].includes(element.value)) {
+      c = true;
+    }
+    if (element.id === 'i' && element.value !== null && [775000000, 775000001, 775000002].includes(element.value)) {
+      i = true;
+    }
+    if (element.id === 'a' && element.value !== null && [775000000, 775000001, 775000002].includes(element.value)) {
+      a = true;
+    }
+  }
+
+  return av && ac && pr && ui && s && c && i && a;
+};
+//#endregion
+
+//#region Base Score
 export const ISS = function (confidentiality, integrity, availability) {
   return 1 - (1 - confidentiality) * (1 - integrity) * (1 - availability);
 };
@@ -94,10 +142,15 @@ export const calculate_base_score = function (Impact, exploitability, scope_valu
     return Roundup(Minimum(1.08 * (Impact + exploitability), 10));
   }
 };
+//#endregion
 
+//#region Temporal Score
 export const calculate_temporal_score = function (BaseScore, e, rl, rc) {
   return Roundup(BaseScore * e * rl * rc);
 };
+//#endregion
+
+//#region Environmental Score
 
 export const calculate_MISS = function (cr, mc, ir, mi, ar, ma) {
   const first_value = 1 - (1 - cr * mc) * (1 - ir * mi) * (1 - ar * ma);
@@ -168,6 +221,8 @@ export const calculate_EnvironmentalScore = function (
     return result;
   }
 };
+
+//#endregion
 
 export const calculate_Overall_CVSS_vector = function (input, data) {
   let vector = '';
@@ -307,48 +362,4 @@ export const calculate_Overall_CVSS_vector = function (input, data) {
     ModifiedExploitability: ModifiedExploitability,
     EnvironmentalScore: EnvironmentalScore,
   };
-};
-
-export const is_mandatory_input_given = function (input) {
-  // all base object are given
-  let av = false;
-  let ac = false;
-  let pr = false;
-  let ui = false;
-  let s = false;
-  let c = false;
-  let i = false;
-  let a = false;
-  for (const element of input) {
-    if (
-      element.id === 'av' &&
-      element.value !== null &&
-      [775000000, 775000001, 775000002, 775000003].includes(element.value)
-    ) {
-      av = true;
-    }
-    if (element.id === 'ac' && element.value !== null && [775000000, 775000001].includes(element.value)) {
-      ac = true;
-    }
-    if (element.id === 'pr' && element.value !== null && [775000000, 775000001, 775000002].includes(element.value)) {
-      pr = true;
-    }
-    if (element.id === 'ui' && element.value !== null && [775000000, 775000001].includes(element.value)) {
-      ui = true;
-    }
-    if (element.id === 's' && element.value !== null && [775000000, 775000001].includes(element.value)) {
-      s = true;
-    }
-    if (element.id === 'c' && element.value !== null && [775000000, 775000001, 775000002].includes(element.value)) {
-      c = true;
-    }
-    if (element.id === 'i' && element.value !== null && [775000000, 775000001, 775000002].includes(element.value)) {
-      i = true;
-    }
-    if (element.id === 'a' && element.value !== null && [775000000, 775000001, 775000002].includes(element.value)) {
-      a = true;
-    }
-  }
-
-  return av && ac && pr && ui && s && c && i && a;
 };
