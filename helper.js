@@ -48,8 +48,15 @@ export const Minimum = function (val_1, val_2) {
   return val_1 < val_2 ? val_1 : val_2;
 };
 
-export const Roundup = function (val) {
-  return Math.ceil(val * 10) / 10;
+export const Roundup = function (input) {
+  //return Math.ceil(input * 10) / 10;
+
+  let int_input = Math.round(input * 100000);
+  if (int_input % 10000 === 0) {
+    return int_input / 100000.0;
+  } else {
+    return (Math.floor(int_input / 10000) + 1) / 10.0;
+  }
 };
 
 export const ISS = function (confidentiality, integrity, availability) {
@@ -93,20 +100,29 @@ export const calculate_temporal_score = function (BaseScore, e, rl, rc) {
 };
 
 export const calculate_MISS = function (cr, mc, ir, mi, ar, ma) {
-  return Minimum(1 - (1 - cr * mc) * (1 - ir * mi) * (1 - ar * ma), 0.915);
+  // Minimum ( 1 - [ (1 - ConfidentialityRequirement × ModifiedConfidentiality) × (1 - IntegrityRequirement × ModifiedIntegrity) × (1 - AvailabilityRequirement × ModifiedAvailability) ], 0.915)
+  const first_value = (1 - cr * mc) * (1 - ir * mi) * (1 - ar * ma);
+  const second_value = 0.915;
+  const result = Minimum(first_value, second_value);
+  debugger;
+  return result;
 };
 
 export const calculate_ModifiedImpact = function (MISS, modified_scope_value) {
   if (modified_scope_value === 'Unchanged') {
-    return 6.42 * MISS;
+    const result = 6.42 * MISS;
+    debugger;
+    return result;
   }
   if (modified_scope_value === 'Changed') {
-    return 7.52 * (MISS - 0.029) - 3.25 * Math.pow(MISS * 0.9731 - 0.02, 13);
+    const result = 7.52 * (MISS - 0.029) - 3.25 * Math.pow(MISS * 0.9731 - 0.02, 13);
+    debugger;
+    return result;
   }
 };
 
 export const calculate_ModifiedExploitability = function (mav, mac, mpr, mui, modified_scope_value) {
-  let mpr_internal = 0;
+  let mpr_internal;
   if (mpr === 'None') {
     mpr_internal = 0.85;
   }
@@ -116,7 +132,9 @@ export const calculate_ModifiedExploitability = function (mav, mac, mpr, mui, mo
   if (mpr === 'High') {
     mpr_internal = modified_scope_value === 'Unchanged' ? 0.27 : 0.5;
   }
-  return 8.22 * mav * mac * mpr_internal * mui;
+  const result = 8.22 * mav * mac * mpr_internal * mui;
+  debugger;
+  return result;
 };
 
 export const calculate_EnvironmentalScore = function (
@@ -127,15 +145,22 @@ export const calculate_EnvironmentalScore = function (
   rl,
   rc
 ) {
-  debugger;
   if (ModifiedImpact <= 0) {
     return 0;
   }
   if (modified_scope_value === 'Unchanged') {
-    return Roundup(Roundup(Minimum(ModifiedImpact + ModifiedExploitability, 10)) * e * rl * rc);
+    //Roundup ( Roundup [Minimum ([ModifiedImpact + ModifiedExploitability], 10) ] × ExploitCodeMaturity × RemediationLevel × ReportConfidence)
+    const first_value = ModifiedImpact + ModifiedExploitability;
+    const second_value = 10;
+    const Minimum_value = Minimum(first_value, second_value);
+    const fisr_Roundup = Roundup(Minimum_value);
+    const second_Roundup = Roundup(fisr_Roundup * e * rl * rc);
+    debugger;
+    return second_Roundup;
   }
   if (modified_scope_value === 'Changed') {
-    return Roundup(Roundup(Minimum(1.08 * (ModifiedImpact + ModifiedExploitability), 10) * e * rl * rc));
+    //Roundup ( Roundup [Minimum (1.08 × [ModifiedImpact + ModifiedExploitability], 10) ] × ExploitCodeMaturity × RemediationLevel × ReportConfidence)
+    return Roundup(Roundup(Minimum(1.08 * (ModifiedImpact + ModifiedExploitability), 10)) * e * rl * rc);
   }
 };
 

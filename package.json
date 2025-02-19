@@ -5,7 +5,7 @@
   "description": "This is a test project for CVSS calculator",
   "main": "index.js",
   "scripts": {
-    "test": "vitest --globals",
+    "test": "vitest --globals ",
     "start": "node index.js"
   },
   "author": "Babuin",
