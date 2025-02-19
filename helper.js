@@ -15,6 +15,9 @@ export const input_base_full_randomzer = function (input_data) {
     { id: 'rc', value: null },
 
     // environmental part
+    { id: 'cr', value: null },
+    { id: 'ir', value: null },
+    { id: 'ar', value: null },
     { id: 'mav', value: null },
     { id: 'mac', value: null },
     { id: 'mpr', value: null },
@@ -23,9 +26,6 @@ export const input_base_full_randomzer = function (input_data) {
     { id: 'mc', value: null },
     { id: 'mi', value: null },
     { id: 'ma', value: null },
-    { id: 'cr', value: null },
-    { id: 'ir', value: null },
-    { id: 'ar', value: null },
   ];
 
   for (const input_object of input_data) {
