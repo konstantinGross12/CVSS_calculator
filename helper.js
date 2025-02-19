@@ -100,18 +100,17 @@ export const calculate_temporal_score = function (BaseScore, e, rl, rc) {
 };
 
 export const calculate_MISS = function (cr, mc, ir, mi, ar, ma) {
-  // Minimum ( 1 - [ (1 - ConfidentialityRequirement × ModifiedConfidentiality) × (1 - IntegrityRequirement × ModifiedIntegrity) × (1 - AvailabilityRequirement × ModifiedAvailability) ], 0.915)
   const first_value = 1 - (1 - cr * mc) * (1 - ir * mi) * (1 - ar * ma);
   const second_value = 0.915;
   const result = Minimum(first_value, second_value);
-  //debugger;
+
   return result;
 };
 
 export const calculate_ModifiedImpact = function (MISS, modified_scope_value) {
   if (modified_scope_value === 'Unchanged') {
     const result = 6.42 * MISS;
-    //debugger;
+    debugger;
     return result;
   }
   if (modified_scope_value === 'Changed') {
@@ -124,16 +123,19 @@ export const calculate_ModifiedImpact = function (MISS, modified_scope_value) {
 export const calculate_ModifiedExploitability = function (mav = 1, mac = 1, mpr, mui = 1, modified_scope_value) {
   let mpr_internal;
   if (mpr === 'None') {
+    debugger;
     mpr_internal = 0.85;
   }
   if (mpr === 'Low') {
-    mpr_internal = modified_scope_value === 'Unchanged' ? 0.62 : 0.68;
+    debugger;
+    mpr_internal = modified_scope_value === 'Changed' ? 0.68 : 0.62; // looks like a bug
   }
   if (mpr === 'High') {
-    mpr_internal = modified_scope_value === 'Unchanged' ? 0.27 : 0.5;
+    debugger;
+    mpr_internal = modified_scope_value === 'Unchanged' ? 0.5 : 0.27; // looks good
   }
   const result = 8.22 * mav * mac * mpr_internal * mui;
-  // 8.22 * 0.85 * 1 * 0.62 * 1
+
   debugger;
   return result;
 };
@@ -142,26 +144,28 @@ export const calculate_EnvironmentalScore = function (
   ModifiedImpact,
   ModifiedExploitability,
   modified_scope_value,
-  e,
-  rl,
-  rc
+  e = 1.0,
+  rl = 1.0,
+  rc = 1.0
 ) {
   if (ModifiedImpact <= 0) {
+    debugger;
     return 0;
   }
   if (modified_scope_value === 'Unchanged') {
     //Roundup ( Roundup [Minimum ([ModifiedImpact + ModifiedExploitability], 10) ] × ExploitCodeMaturity × RemediationLevel × ReportConfidence)
-    const first_value = ModifiedImpact + ModifiedExploitability;
-    const second_value = 10;
-    const Minimum_value = Minimum(first_value, second_value);
-    const fisr_Roundup = Roundup(Minimum_value);
-    const second_Roundup = Roundup(fisr_Roundup * e * rl * rc);
+    let result = Roundup(Roundup(Minimum(ModifiedImpact + ModifiedExploitability, 10)) * e * rl * rc);
     debugger;
-    return second_Roundup;
+    return result;
   }
   if (modified_scope_value === 'Changed') {
     //Roundup ( Roundup [Minimum (1.08 × [ModifiedImpact + ModifiedExploitability], 10) ] × ExploitCodeMaturity × RemediationLevel × ReportConfidence)
-    return Roundup(Roundup(Minimum(1.08 * (ModifiedImpact + ModifiedExploitability), 10)) * e * rl * rc);
+    let first_part = Roundup(Math.min(1.08 * (ModifiedImpact + ModifiedExploitability), 10));
+    let result = Roundup(first_part * e * rl * rc);
+    // 4.8 = 1.08 * (3.31 + x) * 0.95
+    // x is ca. 0968  oder 1
+    debugger;
+    return result;
   }
 };
 
