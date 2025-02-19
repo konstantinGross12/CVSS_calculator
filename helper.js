@@ -101,27 +101,27 @@ export const calculate_temporal_score = function (BaseScore, e, rl, rc) {
 
 export const calculate_MISS = function (cr, mc, ir, mi, ar, ma) {
   // Minimum ( 1 - [ (1 - ConfidentialityRequirement × ModifiedConfidentiality) × (1 - IntegrityRequirement × ModifiedIntegrity) × (1 - AvailabilityRequirement × ModifiedAvailability) ], 0.915)
-  const first_value = (1 - cr * mc) * (1 - ir * mi) * (1 - ar * ma);
+  const first_value = 1 - (1 - cr * mc) * (1 - ir * mi) * (1 - ar * ma);
   const second_value = 0.915;
   const result = Minimum(first_value, second_value);
-  debugger;
+  //debugger;
   return result;
 };
 
 export const calculate_ModifiedImpact = function (MISS, modified_scope_value) {
   if (modified_scope_value === 'Unchanged') {
     const result = 6.42 * MISS;
-    debugger;
+    //debugger;
     return result;
   }
   if (modified_scope_value === 'Changed') {
     const result = 7.52 * (MISS - 0.029) - 3.25 * Math.pow(MISS * 0.9731 - 0.02, 13);
-    debugger;
+    //debugger;
     return result;
   }
 };
 
-export const calculate_ModifiedExploitability = function (mav, mac, mpr, mui, modified_scope_value) {
+export const calculate_ModifiedExploitability = function (mav = 1, mac = 1, mpr, mui = 1, modified_scope_value) {
   let mpr_internal;
   if (mpr === 'None') {
     mpr_internal = 0.85;
@@ -133,6 +133,7 @@ export const calculate_ModifiedExploitability = function (mav, mac, mpr, mui, mo
     mpr_internal = modified_scope_value === 'Unchanged' ? 0.27 : 0.5;
   }
   const result = 8.22 * mav * mac * mpr_internal * mui;
+  // 8.22 * 0.85 * 1 * 0.62 * 1
   debugger;
   return result;
 };
@@ -167,28 +168,28 @@ export const calculate_EnvironmentalScore = function (
 export const calculate_Overall_CVSS_vector = function (input, data) {
   let vector = '';
   // ISS inputs
-  let confidentiality = 0;
-  let integrity = 0;
-  let availability = 0;
+  let confidentiality;
+  let integrity;
+  let availability;
   let scope_value = '';
-  let av = 0;
-  let ac = 0;
-  let pr = 0;
-  let ui = 0;
-  let e = 0;
-  let rl = 0;
-  let rc = 0;
-  let cr = 0;
-  let mc = 0;
-  let ir = 0;
-  let mi = 0;
-  let ar = 0;
-  let ma = 0;
+  let av;
+  let ac;
+  let pr;
+  let ui;
+  let e;
+  let rl;
+  let rc;
+  let cr;
+  let mc;
+  let ir;
+  let mi;
+  let ar;
+  let ma;
   let modified_scope_value = '';
-  let mav = 0;
-  let mac = 0;
-  let mpr = 0;
-  let mui = 0;
+  let mav;
+  let mac;
+  let mpr;
+  let mui;
 
   for (let index = 0; index < input.length; index++) {
     // input elements
