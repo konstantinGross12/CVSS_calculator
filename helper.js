@@ -157,41 +157,50 @@ export const calculate_MISS = function (cr, mc, ir, mi, ar, ma, c, i, a) {
   let internal_mi = mi === 1 ? i : mi;
   let internal_ma = ma === 1 ? a : ma;
   const first_value = 1 - (1 - cr * internal_mc) * (1 - ir * internal_mi) * (1 - ar * internal_ma);
-  //const first_value = 1 - (1 - 0.5 * 0) * (1 - 0.5 * 0) * (1 - 1 * 0.22);
+
   const second_value = 0.915;
   const result = Minimum(first_value, second_value);
-  debugger;
+
   return result;
 };
 
 export const calculate_ModifiedImpact = function (MISS, modified_scope_value) {
   if (modified_scope_value === 'Unchanged') {
     const result = 6.42 * MISS;
-    debugger;
+
     return result;
   }
   if (modified_scope_value === 'Changed') {
     const result = 7.52 * (MISS - 0.029) - 3.25 * Math.pow(MISS * 0.9731 - 0.02, 13);
-    //debugger;
+
     return result;
   }
 };
 
-export const calculate_ModifiedExploitability = function (mav = 1, mac = 1, mpr, mui = 1, modified_scope_value) {
-  let mpr_internal;
-  if (mpr === 'None' || mpr === 'Not Defined') {
+export const calculate_ModifiedExploitability = function (mav, mac, mpr, mui, modified_scope_value, av, ac, pr, ui) {
+  let intenal_mav = mav === 1 ? av : mav;
+  let internal_mac = mac === 1 ? ac : mac;
+  let internal_mpr;
+  let internal_mui = mui === 1 ? ui : mui;
+  debugger;
+  if (mpr === 'Not Defined' || mpr === 'Null') {
     debugger;
-    mpr_internal = 0.85;
+    internal_mpr = pr;
+  }
+
+  if (mpr === 'None') {
+    debugger;
+    internal_mpr = 0.85;
   }
   if (mpr === 'Low') {
     debugger;
-    mpr_internal = modified_scope_value === 'Changed' ? 0.68 : 0.62; // looks like a bug
+    internal_mpr = modified_scope_value === 'Changed' ? 0.68 : 0.62; // looks like a bug
   }
   if (mpr === 'High') {
     debugger;
-    mpr_internal = modified_scope_value === 'Unchanged' ? 0.5 : 0.27; // looks good
+    internal_mpr = modified_scope_value === 'Changed' ? 0.5 : 0.27; // looks good
   }
-  const result = 8.22 * mav * mac * mpr_internal * mui;
+  const result = 8.22 * intenal_mav * internal_mac * internal_mpr * internal_mui;
 
   debugger;
   return result;
@@ -238,6 +247,7 @@ export const calculate_Overall_CVSS_vector = function (input, data) {
   let av;
   let ac;
   let pr;
+  let pr_value;
   let ui;
   let e;
   let rl;
@@ -286,6 +296,7 @@ export const calculate_Overall_CVSS_vector = function (input, data) {
         }
         if (input_element_id === 'pr') {
           pr = data_obj.label;
+          pr_value = data_obj.value_calcultation;
         }
         if (input_element_id === 'ui') {
           ui = data_obj.value_calcultation;
@@ -344,7 +355,17 @@ export const calculate_Overall_CVSS_vector = function (input, data) {
   const MISS = calculate_MISS(cr, mc, ir, mi, ar, ma, confidentiality, integrity, availability);
   // from here with modified values
   const ModifiedImpact = calculate_ModifiedImpact(MISS, modified_scope_value);
-  const ModifiedExploitability = calculate_ModifiedExploitability(mav, mac, mpr, mui, modified_scope_value);
+  const ModifiedExploitability = calculate_ModifiedExploitability(
+    mav,
+    mac,
+    mpr,
+    mui,
+    modified_scope_value,
+    av,
+    ac,
+    pr_value,
+    ui
+  );
   const EnvironmentalScore = calculate_EnvironmentalScore(
     ModifiedImpact,
     ModifiedExploitability,
