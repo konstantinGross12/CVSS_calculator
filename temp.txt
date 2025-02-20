@@ -1,0 +1,11 @@
+Fall A
+
+{
+  "totalMissScore": 0.21999999999999997,
+  "crFactor": 0.5, cr
+  "mci": 0,
+  "irFactor": 0.5,
+  "mii": 0,
+  "arFactor": 1,
+  "mai": 0.22 // Quest
+}

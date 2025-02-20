@@ -552,7 +552,7 @@ export const mi = [
   },
   {
     label: 'Not Defined',
-    value_calcultation: 1,
+    value_calcultation: 0,
     dataverse_label: 'Not Defined',
     dataverse_value: 775000000,
     string_value: 'MI:X',

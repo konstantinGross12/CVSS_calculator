@@ -152,8 +152,12 @@ export const calculate_temporal_score = function (BaseScore, e, rl, rc) {
 
 //#region Environmental Score
 
-export const calculate_MISS = function (cr, mc, ir, mi, ar, ma) {
-  const first_value = 1 - (1 - cr * mc) * (1 - ir * mi) * (1 - ar * ma);
+export const calculate_MISS = function (cr, mc, ir, mi, ar, ma, c, i, a) {
+  let internal_mc = mc === 1 ? c : mc;
+  let internal_mi = mi === 1 ? i : mi;
+  let internal_ma = ma === 1 ? a : ma;
+  const first_value = 1 - (1 - cr * internal_mc) * (1 - ir * internal_mi) * (1 - ar * internal_ma);
+  //const first_value = 1 - (1 - 0.5 * 0) * (1 - 0.5 * 0) * (1 - 1 * 0.22);
   const second_value = 0.915;
   const result = Minimum(first_value, second_value);
   debugger;
@@ -337,7 +341,7 @@ export const calculate_Overall_CVSS_vector = function (input, data) {
   const exploitability = calculate_exploitability(av, ac, pr, ui, scope_value);
   const BaseScore = calculate_base_score(Impact, exploitability, scope_value);
   const TemporalScore = calculate_temporal_score(BaseScore, e, rl, rc);
-  const MISS = calculate_MISS(cr, mc, ir, mi, ar, ma);
+  const MISS = calculate_MISS(cr, mc, ir, mi, ar, ma, confidentiality, integrity, availability);
   // from here with modified values
   const ModifiedImpact = calculate_ModifiedImpact(MISS, modified_scope_value);
   const ModifiedExploitability = calculate_ModifiedExploitability(mav, mac, mpr, mui, modified_scope_value);

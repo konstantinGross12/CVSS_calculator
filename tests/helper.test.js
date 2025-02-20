@@ -426,6 +426,41 @@ describe('Temporal Scores', () => {
   });
 });
 
+describe('MISS Score', () => {
+  it('MISS Score A', () => {
+    // Arrange
+    const input = [
+      { id: 'av', value: 775000002 },
+      { id: 'ac', value: 775000000 },
+      { id: 'pr', value: 775000001 },
+      { id: 'ui', value: 775000000 },
+      { id: 's', value: 775000000 },
+      { id: 'c', value: 775000002 },
+      { id: 'i', value: 775000000 },
+      { id: 'a', value: 775000001 },
+      { id: 'e', value: 775000004 },
+      { id: 'rl', value: 775000000 },
+      { id: 'rc', value: 775000001 },
+      { id: 'cr', value: 775000001 },
+      { id: 'ir', value: 775000001 },
+      { id: 'ar', value: 775000000 },
+      { id: 'mav', value: 775000001 },
+      { id: 'mac', value: 775000000 },
+      { id: 'mpr', value: 775000000 },
+      { id: 'mui', value: 775000000 },
+      { id: 'ms', value: 775000001 },
+      { id: 'mc', value: 775000001 },
+      { id: 'mi', value: 775000000 },
+      { id: 'ma', value: 775000000 },
+    ];
+    const expected = 0.21999999999999997;
+    // Act
+    const result = calculate_Overall_CVSS_vector(input, data);
+    // Assert
+    expect(result.MISS).toEqual(expected);
+  });
+});
+
 describe('Enviromental Scores', () => {
   it('Enviromental Score A', () => {
     // Arrange
