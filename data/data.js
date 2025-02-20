@@ -1,5 +1,5 @@
 //#region BASE
-//BASE
+
 //Attack Vector
 export const av = [
   {
@@ -181,7 +181,7 @@ export const a = [
 ];
 //#endregion
 //#region TEMPORAL
-//Temporal
+
 //Exploit Code Maturity
 export const e = [
   {
@@ -312,7 +312,7 @@ export const rc = [
 ];
 //#endregion
 //#region ENVIRONMENTAL
-//Environmental
+
 //Attack Vector(MAV)
 export const mav = [
   {

@@ -156,7 +156,7 @@ export const calculate_MISS = function (cr, mc, ir, mi, ar, ma) {
   const first_value = 1 - (1 - cr * mc) * (1 - ir * mi) * (1 - ar * ma);
   const second_value = 0.915;
   const result = Minimum(first_value, second_value);
-
+  debugger;
   return result;
 };
 
@@ -175,7 +175,7 @@ export const calculate_ModifiedImpact = function (MISS, modified_scope_value) {
 
 export const calculate_ModifiedExploitability = function (mav = 1, mac = 1, mpr, mui = 1, modified_scope_value) {
   let mpr_internal;
-  if (mpr === 'None') {
+  if (mpr === 'None' || mpr === 'Not Defined') {
     debugger;
     mpr_internal = 0.85;
   }
@@ -207,7 +207,8 @@ export const calculate_EnvironmentalScore = function (
   }
   if (modified_scope_value === 'Unchanged') {
     //Roundup ( Roundup [Minimum ([ModifiedImpact + ModifiedExploitability], 10) ] × ExploitCodeMaturity × RemediationLevel × ReportConfidence)
-    let result = Roundup(Roundup(Minimum(ModifiedImpact + ModifiedExploitability, 10)) * e * rl * rc);
+    //let result = Roundup(Roundup(Minimum(ModifiedImpact + ModifiedExploitability, 10)) * e * rl * rc);
+    let result = Roundup(Roundup(Minimum(1.4 + ModifiedExploitability, 10)) * e * rl * rc);
     debugger;
     return result;
   }
@@ -215,8 +216,7 @@ export const calculate_EnvironmentalScore = function (
     //Roundup ( Roundup [Minimum (1.08 × [ModifiedImpact + ModifiedExploitability], 10) ] × ExploitCodeMaturity × RemediationLevel × ReportConfidence)
     let first_part = Roundup(Math.min(1.08 * (ModifiedImpact + ModifiedExploitability), 10));
     let result = Roundup(first_part * e * rl * rc);
-    // 4.8 = 1.08 * (3.31 + x) * 0.95
-    // x is ca. 0968  oder 1
+
     debugger;
     return result;
   }
