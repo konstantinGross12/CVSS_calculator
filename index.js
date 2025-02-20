@@ -15,13 +15,7 @@ if (!is_valid_input) {
   let Overall_CVSS_vector = helper.calculate_Overall_CVSS_vector(input, data);
   console.log(Overall_CVSS_vector.vector);
 
-  console.log(`ISS is  ${Overall_CVSS_vector.ISS}`);
-  console.log(`Impact is ${Overall_CVSS_vector.Impact}`);
-  console.log(`Exploitability is  ${Overall_CVSS_vector.exploitability}`);
   console.log(`BaseScore is  ${Overall_CVSS_vector.BaseScore}`);
   console.log(`TemporalScore is  ${Overall_CVSS_vector.TemporalScore}`);
-  console.log(`MISS is  ${Overall_CVSS_vector.MISS}`);
-  console.log(`ModifiedImpact is  ${Overall_CVSS_vector.ModifiedImpact}`);
-  console.log(`ModifiedExploitability is  ${Overall_CVSS_vector.ModifiedExploitability}`);
   console.log(`EnvironmentalScore is  ${Overall_CVSS_vector.EnvironmentalScore}`);
 }
