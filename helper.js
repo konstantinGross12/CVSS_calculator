@@ -1,7 +1,5 @@
 //#region Data
 
-import { s } from './data/data';
-
 export const input_base_full_randomzer = function (input_data) {
   let result = [
     // base part
