@@ -24,11 +24,11 @@ const inputs_from_tests = [
     { id: 'mav', value: 775000001 }, // MAV:N Network value should be 0.85
     { id: 'mac', value: 775000000 }, // MAC:X value should be 1
     { id: 'mpr', value: 775000000 }, // MPR:X Not Defined value should be 1
-    { id: 'mui', value: 775000000 },
+    { id: 'mui', value: 775000000 }, // MUI:X Not Defined value should be 1
     { id: 'ms', value: 775000001 }, // MS:U Unchanged
-    { id: 'mc', value: 775000001 },
-    { id: 'mi', value: 775000000 },
-    { id: 'ma', value: 775000000 },
+    { id: 'mc', value: 775000001 }, // MX:N None value should be 0
+    { id: 'mi', value: 775000000 }, // MI:X Not Defined value should be 1
+    { id: 'ma', value: 775000000 }, // MA:X Not Defined value should be 1
   ],
   // Enviromental Score B 1
   [
