@@ -1,5 +1,7 @@
 //#region Data
 
+import { s } from './data/data';
+
 export const input_base_full_randomzer = function (input_data) {
   let result = [
     // base part
@@ -164,20 +166,42 @@ export const calculate_MISS = function (cr, mc, ir, mi, ar, ma, c, i, a) {
   return result;
 };
 
-export const calculate_ModifiedImpact = function (MISS, modified_scope_value) {
+export const calculate_ModifiedImpact = function (MISS, modified_scope_value, scope_value) {
+  debugger;
   if (modified_scope_value === 'Unchanged') {
     const result = 6.42 * MISS;
-
+    debugger;
     return result;
   }
   if (modified_scope_value === 'Changed') {
     const result = 7.52 * (MISS - 0.029) - 3.25 * Math.pow(MISS * 0.9731 - 0.02, 13);
-
+    debugger;
+    return result;
+  }
+  if (scope_value === 'Unchanged') {
+    const result = 6.42 * MISS;
+    debugger;
+    return result;
+  }
+  if (scope_value === 'Changed') {
+    const result = 7.52 * (MISS - 0.029) - 3.25 * Math.pow(MISS * 0.9731 - 0.02, 13);
+    debugger;
     return result;
   }
 };
 
-export const calculate_ModifiedExploitability = function (mav, mac, mpr, mui, modified_scope_value, av, ac, pr, ui) {
+export const calculate_ModifiedExploitability = function (
+  mav,
+  mac,
+  mpr,
+  mui,
+  modified_scope_value,
+  av,
+  ac,
+  pr,
+  ui,
+  scope_value
+) {
   let intenal_mav = mav === 1 ? av : mav;
   let internal_mac = mac === 1 ? ac : mac;
   let internal_mpr;
@@ -194,11 +218,19 @@ export const calculate_ModifiedExploitability = function (mav, mac, mpr, mui, mo
   }
   if (mpr === 'Low') {
     debugger;
-    internal_mpr = modified_scope_value === 'Changed' ? 0.68 : 0.62; // looks like a bug
+    if (modified_scope_value === 'Changed' || modified_scope_value === 'Unchanged') {
+      internal_mpr = modified_scope_value === 'Changed' ? 0.68 : 0.62;
+    } else {
+      internal_mpr = scope_value === 'Changed' ? 0.68 : 0.62;
+    }
   }
   if (mpr === 'High') {
     debugger;
-    internal_mpr = modified_scope_value === 'Changed' ? 0.5 : 0.27; // looks good
+    if (modified_scope_value === 'Changed' || modified_scope_value === 'Unchanged') {
+      internal_mpr = modified_scope_value === 'Changed' ? 0.5 : 0.27;
+    } else {
+      internal_mpr = scope_value === 'Changed' ? 0.5 : 0.27;
+    }
   }
   const result = 8.22 * intenal_mav * internal_mac * internal_mpr * internal_mui;
 
@@ -210,6 +242,7 @@ export const calculate_EnvironmentalScore = function (
   ModifiedImpact,
   ModifiedExploitability,
   modified_scope_value,
+  scope_value,
   e = 1.0,
   rl = 1.0,
   rc = 1.0
@@ -218,20 +251,39 @@ export const calculate_EnvironmentalScore = function (
     debugger;
     return 0;
   }
-  if (modified_scope_value === 'Unchanged') {
-    //Roundup ( Roundup [Minimum ([ModifiedImpact + ModifiedExploitability], 10) ] × ExploitCodeMaturity × RemediationLevel × ReportConfidence)
-    //let result = Roundup(Roundup(Minimum(ModifiedImpact + ModifiedExploitability, 10)) * e * rl * rc);
-    let result = Roundup(Roundup(Minimum(1.4 + ModifiedExploitability, 10)) * e * rl * rc);
-    debugger;
-    return result;
-  }
-  if (modified_scope_value === 'Changed') {
-    //Roundup ( Roundup [Minimum (1.08 × [ModifiedImpact + ModifiedExploitability], 10) ] × ExploitCodeMaturity × RemediationLevel × ReportConfidence)
-    let first_part = Roundup(Math.min(1.08 * (ModifiedImpact + ModifiedExploitability), 10));
-    let result = Roundup(first_part * e * rl * rc);
 
-    debugger;
-    return result;
+  if (modified_scope_value === 'Changed' || modified_scope_value === 'Unchanged') {
+    if (modified_scope_value === 'Unchanged') {
+      //Roundup ( Roundup [Minimum ([ModifiedImpact + ModifiedExploitability], 10) ] × ExploitCodeMaturity × RemediationLevel × ReportConfidence)
+      //let result = Roundup(Roundup(Minimum(ModifiedImpact + ModifiedExploitability, 10)) * e * rl * rc);
+      let result = Roundup(Roundup(Minimum(ModifiedImpact + ModifiedExploitability, 10)) * e * rl * rc);
+      debugger;
+      return result;
+    }
+    if (modified_scope_value === 'Changed') {
+      //Roundup ( Roundup [Minimum (1.08 × [ModifiedImpact + ModifiedExploitability], 10) ] × ExploitCodeMaturity × RemediationLevel × ReportConfidence)
+      let first_part = Roundup(Math.min(1.08 * (ModifiedImpact + ModifiedExploitability), 10));
+      let result = Roundup(first_part * e * rl * rc);
+
+      debugger;
+      return result;
+    }
+  } else {
+    if (scope_value === 'Unchanged') {
+      //Roundup ( Roundup [Minimum ([ModifiedImpact + ModifiedExploitability], 10) ] × ExploitCodeMaturity × RemediationLevel × ReportConfidence)
+      //let result = Roundup(Roundup(Minimum(ModifiedImpact + ModifiedExploitability, 10)) * e * rl * rc);
+      let result = Roundup(Roundup(Minimum(ModifiedImpact + ModifiedExploitability, 10)) * e * rl * rc);
+      debugger;
+      return result;
+    }
+    if (scope_value === 'Changed') {
+      //Roundup ( Roundup [Minimum (1.08 × [ModifiedImpact + ModifiedExploitability], 10) ] × ExploitCodeMaturity × RemediationLevel × ReportConfidence)
+      let first_part = Roundup(Math.min(1.08 * (ModifiedImpact + ModifiedExploitability), 10));
+      let result = Roundup(first_part * e * rl * rc);
+
+      debugger;
+      return result;
+    }
   }
 };
 
@@ -354,7 +406,7 @@ export const calculate_Overall_CVSS_vector = function (input, data) {
   const TemporalScore = calculate_temporal_score(BaseScore, e, rl, rc);
   const MISS = calculate_MISS(cr, mc, ir, mi, ar, ma, confidentiality, integrity, availability);
   // from here with modified values
-  const ModifiedImpact = calculate_ModifiedImpact(MISS, modified_scope_value);
+  const ModifiedImpact = calculate_ModifiedImpact(MISS, modified_scope_value, scope_value);
   const ModifiedExploitability = calculate_ModifiedExploitability(
     mav,
     mac,
@@ -370,6 +422,7 @@ export const calculate_Overall_CVSS_vector = function (input, data) {
     ModifiedImpact,
     ModifiedExploitability,
     modified_scope_value,
+    scope_value,
     e,
     rl,
     rc

@@ -158,7 +158,7 @@ const inputs_from_tests = [
   ],
 ];
 
-const input = inputs_from_tests[0];
+const input = inputs_from_tests[4];
 
 let is_valid_input = helper.is_mandatory_input_given(input);
 
