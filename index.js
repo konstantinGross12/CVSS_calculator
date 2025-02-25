@@ -22,10 +22,8 @@ if (!is_valid_input) {
 
 (async () => {
   try {
-    // https://cvss-vector-validator-bxdqdebdh0hcb6cz.germanywestcentral-01.azurewebsites.net/v3?vector=CVSS%3A3.0%2FAV%3AN%2FAC%3AL%2FPR%3AN%2FUI%3AR%2FS%3AC%2FC%3AH%2FI%3AH%2FA%3AH%2FE%3AU%2FRL%3AO%2FRC%3AC
     const res = await fetch(
-      //'https://cvss-vector-validator-bxdqdebdh0hcb6cz.germanywestcentral-01.azurewebsites.net/v3?vector=CVSS%3A3.0%2FAV%3AN%2FAC%3AL%2FPR%3AN%2FUI%3AR%2FS%3AC%2FC%3AH%2FI%3AH%2FA%3AH%2FE%3AU%2FRL%3AO%2FRC%3AC'
-      'https://cvss-vector-validator-bxdqdebdh0hcb6cz.germanywestcentral-01.azurewebsites.net/v3?vector=CVSS:3.0/AV:P/AC:H/PR:N/UI:N/S:C/C:N/I:L/A:H/E:F/RL:X/RC:C/CR:M/IR:X/AR:L/MAV:X/MAC:H/MPR:H/MUI:N/MS:X/MC:N/MI:X/MA:N'
+      'https://cvss-vector-validator-bxdqdebdh0hcb6cz.germanywestcentral-01.azurewebsites.net/v3?vector=CVSS:3.1/AV:P/AC:H/PR:N/UI:N/S:C/C:N/I:L/A:H/E:F/RL:X/RC:C/CR:M/IR:X/AR:L/MAV:X/MAC:H/MPR:H/MUI:N/MS:X/MC:N/MI:X/MA:N'
     );
     const headerDate = res.headers && res.headers.get('date') ? res.headers.get('date') : 'no response date';
     console.log('Status Code:', res.status);
