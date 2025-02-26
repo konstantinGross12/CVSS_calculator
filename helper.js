@@ -209,6 +209,7 @@ export const calculate_ModifiedExploitability = function (
   av,
   ac,
   pr,
+  pr_value,
   ui,
   scope_value
 ) {
@@ -218,9 +219,7 @@ export const calculate_ModifiedExploitability = function (
   let internal_mui = mui === 1 ? ui : mui;
 
   if (mpr === 'Not Defined' || mpr === 'Null') {
-    internal_mpr = pr;
-
-    // Problem here scope or modified scope
+    internal_mpr = pr_value;
 
     if (modified_scope_value === 'Not Defined' || modified_scope_value === 'Null') {
       if (pr === 'None') {
@@ -232,18 +231,24 @@ export const calculate_ModifiedExploitability = function (
       if (pr === 'High') {
         internal_mpr = scope_value === 'Changed' ? 0.5 : 0.27;
       }
-    } else {
-      if (pr === 'None') {
-        internal_mpr = 0.85;
-      }
+    }
+
+    if (modified_scope_value === 'Changed') {
       if (pr === 'Low') {
-        internal_mpr = modified_scope_value === 'Changed' ? 0.68 : 0.62;
+        internal_mpr = 0.68;
       }
       if (pr === 'High') {
-        internal_mpr = modified_scope_value === 'Changed' ? 0.5 : 0.27;
+        internal_mpr = 0.5;
       }
+    }
 
-      // retun
+    if (modified_scope_value === 'Unchanged') {
+      if (pr === 'Low') {
+        internal_mpr = 0.62;
+      }
+      if (pr === 'High') {
+        internal_mpr = 0.27;
+      }
     }
   }
 
@@ -265,7 +270,6 @@ export const calculate_ModifiedExploitability = function (
     }
   }
   const result = 8.22 * intenal_mav * internal_mac * internal_mpr * internal_mui;
-  console.warn(`8.22 * ${intenal_mav} * ${internal_mac} * ${internal_mpr} * ${internal_mui}`);
 
   return result;
 };
@@ -443,8 +447,10 @@ export const calculate_Overall_CVSS_vector = function (input, data) {
     modified_scope_value,
     av,
     ac,
+    pr,
     pr_value,
-    ui
+    ui,
+    scope_value
   );
   const EnvironmentalScore = calculate_EnvironmentalScore(
     ModifiedImpact,
