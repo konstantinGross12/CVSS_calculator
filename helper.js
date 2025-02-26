@@ -156,20 +156,9 @@ export const calculate_MISS = function (cr, mc, ir, mi, ar, ma, c, i, a) {
   let internal_mc = mc === 1 ? c : mc;
   let internal_mi = mi === 1 ? i : mi;
   let internal_ma = ma === 1 ? a : ma;
+
   const first_value = 1 - (1 - cr * internal_mc) * (1 - ir * internal_mi) * (1 - ar * internal_ma);
-  console.warn('internal_mc', internal_mc);
-  console.warn('internal_mi', internal_mi);
-  console.warn('internal_ma', internal_ma);
-  console.warn('cr', cr);
-  console.warn('ir', ir);
-  console.warn('ar', ar);
-  console.warn('first_value', first_value);
-  console.warn(
-    `${first_value} = 1 - (1 - ${cr} * ${internal_mc}) * (1 - ${ir} * ${internal_mi}) * (1 - ${ar} * ${internal_ma})`
-  );
-  console.warn(
-    `${first_value} = 1 - (${1 - cr * internal_mc}) * (${1 - ir * internal_mi}) * (${1 - ar * internal_ma})`
-  );
+
   const second_value = 0.915;
   const result = Minimum(first_value, second_value);
 
@@ -227,18 +216,41 @@ export const calculate_ModifiedExploitability = function (
   let internal_mac = mac === 1 ? ac : mac;
   let internal_mpr;
   let internal_mui = mui === 1 ? ui : mui;
-  debugger;
+
   if (mpr === 'Not Defined' || mpr === 'Null') {
-    debugger;
     internal_mpr = pr;
+
+    // Problem here scope or modified scope
+
+    if (modified_scope_value === 'Not Defined' || modified_scope_value === 'Null') {
+      if (pr === 'None') {
+        internal_mpr = 0.85;
+      }
+      if (pr === 'Low') {
+        internal_mpr = scope_value === 'Changed' ? 0.68 : 0.62;
+      }
+      if (pr === 'High') {
+        internal_mpr = scope_value === 'Changed' ? 0.5 : 0.27;
+      }
+    } else {
+      if (pr === 'None') {
+        internal_mpr = 0.85;
+      }
+      if (pr === 'Low') {
+        internal_mpr = modified_scope_value === 'Changed' ? 0.68 : 0.62;
+      }
+      if (pr === 'High') {
+        internal_mpr = modified_scope_value === 'Changed' ? 0.5 : 0.27;
+      }
+
+      // retun
+    }
   }
 
   if (mpr === 'None') {
-    debugger;
     internal_mpr = 0.85;
   }
   if (mpr === 'Low') {
-    debugger;
     if (modified_scope_value === 'Changed' || modified_scope_value === 'Unchanged') {
       internal_mpr = modified_scope_value === 'Changed' ? 0.68 : 0.62;
     } else {
@@ -246,7 +258,6 @@ export const calculate_ModifiedExploitability = function (
     }
   }
   if (mpr === 'High') {
-    debugger;
     if (modified_scope_value === 'Changed' || modified_scope_value === 'Unchanged') {
       internal_mpr = modified_scope_value === 'Changed' ? 0.5 : 0.27;
     } else {
@@ -254,8 +265,8 @@ export const calculate_ModifiedExploitability = function (
     }
   }
   const result = 8.22 * intenal_mav * internal_mac * internal_mpr * internal_mui;
+  console.warn(`8.22 * ${intenal_mav} * ${internal_mac} * ${internal_mpr} * ${internal_mui}`);
 
-  debugger;
   return result;
 };
 
@@ -269,7 +280,6 @@ export const calculate_EnvironmentalScore = function (
   rc = 1.0
 ) {
   if (ModifiedImpact <= 0) {
-    debugger;
     return 0;
   }
 
@@ -278,7 +288,7 @@ export const calculate_EnvironmentalScore = function (
       //Roundup ( Roundup [Minimum ([ModifiedImpact + ModifiedExploitability], 10) ] × ExploitCodeMaturity × RemediationLevel × ReportConfidence)
       //let result = Roundup(Roundup(Minimum(ModifiedImpact + ModifiedExploitability, 10)) * e * rl * rc);
       let result = Roundup(Roundup(Minimum(ModifiedImpact + ModifiedExploitability, 10)) * e * rl * rc);
-      debugger;
+
       return result;
     }
     if (modified_scope_value === 'Changed') {
@@ -286,7 +296,6 @@ export const calculate_EnvironmentalScore = function (
       let first_part = Roundup(Math.min(1.08 * (ModifiedImpact + ModifiedExploitability), 10));
       let result = Roundup(first_part * e * rl * rc);
 
-      debugger;
       return result;
     }
   } else {
@@ -294,7 +303,7 @@ export const calculate_EnvironmentalScore = function (
       //Roundup ( Roundup [Minimum ([ModifiedImpact + ModifiedExploitability], 10) ] × ExploitCodeMaturity × RemediationLevel × ReportConfidence)
       //let result = Roundup(Roundup(Minimum(ModifiedImpact + ModifiedExploitability, 10)) * e * rl * rc);
       let result = Roundup(Roundup(Minimum(ModifiedImpact + ModifiedExploitability, 10)) * e * rl * rc);
-      debugger;
+
       return result;
     }
     if (scope_value === 'Changed') {
@@ -302,7 +311,6 @@ export const calculate_EnvironmentalScore = function (
       let first_part = Roundup(Math.min(1.08 * (ModifiedImpact + ModifiedExploitability), 10));
       let result = Roundup(first_part * e * rl * rc);
 
-      debugger;
       return result;
     }
   }

@@ -27,29 +27,26 @@ while (counter < blocker) {
         );
 
         const result = await res.json();
-        const base_score = result.base_score;
-        const temporal_score = result.temporal_score;
+
         const modified_isc_base = result.modified_isc_base; //MISS
         const modified_isc = result.modified_isc; //ModifiedImpact
         const modified_esc = result.modified_esc; //ModifiedExploitability
         const environmental_score = result.environmental_score;
 
-        console.log(`---------------------------------------------------------`);
-        console.log(`Calculated Vector:                   ${vector}`);
-        console.log(`API Vector:                          ${result.vector.slice(9)}`);
-        console.log(`Calculated Base Score:               ${base}`);
-        console.log(`API Base Score:                      ${base_score}`);
-        console.log(`Calculated Temporal Score:           ${temporal}`);
-        console.log(`API Temporal Score:                  ${temporal_score}`);
-        console.log(`Calculated MISS:                     ${MISS}`);
-        console.log(`API MISS:                            ${modified_isc_base}`);
-        console.log(`Calculated Modified Impact:          ${ModifiedImpact}`);
-        console.log(`API Modified Impact:                 ${modified_isc}`);
-        console.log(`Calculated Modified Exploitability:  ${ModifiedExploitability}`);
-        console.log(`API Modified Exploitability:         ${modified_esc}`);
-        console.log(`Calculated Environmental Score:      ${environmental}`);
-        console.log(`API Environmental Score:             ${environmental_score}`);
-        console.log(`---------------------------------------------------------`);
+        if (helper.Roundup(MISS) != modified_isc_base) {
+          console.log(`---------------------------------------------------------`);
+          console.log(`Calculated Vector:                   ${vector}`);
+          console.log(`API Vector:                          ${result.vector.slice(9)}`);
+          console.log(`Calculated MISS:                     ${MISS}`);
+          console.log(`API MISS:                            ${modified_isc_base}`);
+          console.log(`Calculated Modified Impact:          ${ModifiedImpact}`);
+          console.log(`API Modified Impact:                 ${modified_isc}`);
+          console.log(`Calculated Modified Exploitability:  ${ModifiedExploitability}`);
+          console.log(`API Modified Exploitability:         ${modified_esc}`);
+          console.log(`Calculated Environmental Score:      ${environmental}`);
+          console.log(`API Environmental Score:             ${environmental_score}`);
+          console.log(`---------------------------------------------------------`);
+        }
       } catch (err) {
         console.log(err.message); //can be console.error
       }
