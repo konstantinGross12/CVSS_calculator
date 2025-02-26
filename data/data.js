@@ -546,14 +546,14 @@ export const mi = [
   {
     label: 'None',
     value_calcultation: 0,
-    dataverse_label: 'None',
+    dataverse_label: 'None', // Problem here
     dataverse_value: 775000001,
     string_value: 'MI:N',
   },
   {
     label: 'Not Defined',
     value_calcultation: 0,
-    dataverse_label: 'Not Defined',
+    dataverse_label: 'Not Defined', // Problem here
     dataverse_value: 775000000,
     string_value: 'MI:X',
   },

@@ -157,7 +157,19 @@ export const calculate_MISS = function (cr, mc, ir, mi, ar, ma, c, i, a) {
   let internal_mi = mi === 1 ? i : mi;
   let internal_ma = ma === 1 ? a : ma;
   const first_value = 1 - (1 - cr * internal_mc) * (1 - ir * internal_mi) * (1 - ar * internal_ma);
-
+  console.warn('internal_mc', internal_mc);
+  console.warn('internal_mi', internal_mi);
+  console.warn('internal_ma', internal_ma);
+  console.warn('cr', cr);
+  console.warn('ir', ir);
+  console.warn('ar', ar);
+  console.warn('first_value', first_value);
+  console.warn(
+    `${first_value} = 1 - (1 - ${cr} * ${internal_mc}) * (1 - ${ir} * ${internal_mi}) * (1 - ${ar} * ${internal_ma})`
+  );
+  console.warn(
+    `${first_value} = 1 - (${1 - cr * internal_mc}) * (${1 - ir * internal_mi}) * (${1 - ar * internal_ma})`
+  );
   const second_value = 0.915;
   const result = Minimum(first_value, second_value);
 
@@ -165,13 +177,6 @@ export const calculate_MISS = function (cr, mc, ir, mi, ar, ma, c, i, a) {
 };
 
 export const calculate_ModifiedImpact = function (MISS, modified_scope_value, scope_value) {
-  console.error('MISS', MISS);
-  console.error('modified_scope_value', modified_scope_value);
-  console.error('scope_value', scope_value);
-  if (scope_value !== 'Unchanged' && scope_value !== 'Changed') {
-    console.error('Scope value is not valid');
-  }
-
   if (
     modified_scope_value !== 'Unchanged' &&
     modified_scope_value !== 'Changed' &&
@@ -183,37 +188,26 @@ export const calculate_ModifiedImpact = function (MISS, modified_scope_value, sc
 
   if (modified_scope_value === 'Unchanged') {
     const result = 6.42 * MISS;
-    if (!result) {
-      console.warn('Here  184');
-      console.warn(typeof result);
-    }
+
     return result;
   }
   if (modified_scope_value === 'Changed') {
     const result = 7.52 * (MISS - 0.029) - 3.25 * Math.pow(MISS * 0.9731 - 0.02, 13);
-    if (!result) {
-      console.warn('Here 191');
-    }
+
     return result;
   }
 
   if (modified_scope_value === 'Not Defined' || modified_scope_value === 'Null') {
     if (scope_value === 'Unchanged') {
       const result = 6.42 * MISS;
-      if (!result) {
-        console.warn('Here 200');
-      }
+
       return result;
     }
     if (scope_value === 'Changed') {
       const result = 7.52 * (MISS - 0.029) - 3.25 * Math.pow(MISS * 0.9731 - 0.02, 13);
-      if (!result) {
-        console.warn('Here');
-      }
+
       return result;
     }
-  } else {
-    console.error('Here');
   }
 };
 
@@ -432,9 +426,7 @@ export const calculate_Overall_CVSS_vector = function (input, data) {
   const BaseScore = calculate_base_score(Impact, exploitability, scope_value);
   const TemporalScore = calculate_temporal_score(BaseScore, e, rl, rc);
   const MISS = calculate_MISS(cr, mc, ir, mi, ar, ma, confidentiality, integrity, availability);
-  // from here with modified values
   const ModifiedImpact = calculate_ModifiedImpact(MISS, modified_scope_value, scope_value);
-  console.error('ModifiedImpact is HERE', ModifiedImpact);
   const ModifiedExploitability = calculate_ModifiedExploitability(
     mav,
     mac,
