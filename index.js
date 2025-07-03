@@ -2,7 +2,7 @@ import * as data from './data/data.js';
 import * as helper from './helper.js';
 
 let counter = 0;
-const blocker = 10000;
+const blocker = 1000;
 while (counter < blocker) {
   let input = helper.input_base_full_randomzer(data.base_full_input_data);
   //AV:L/AC:H/PR:H/UI:R/S:C/C:H/I:N/A:N/E:H/RL:U/RC:R/CR:L/IR:L/AR:H/MAV:L/MAC:L/MPR:X/MUI:N/MS:C/MC:X/MI:N/MA:N
